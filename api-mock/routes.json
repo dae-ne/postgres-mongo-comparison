@@ -1,0 +1,6 @@
+{
+  "/postgres/food": "/food",
+  "/postgres/food/:id": "/food/:id",
+  "/mongodb/food": "/food",
+  "/mongodb/food/:id": "/food/:id"
+}
