@@ -1,9 +1,0 @@
-{
-  "name": "ztb",
-  "scripts": {
-    "start": "json-server db.json --routes routes.json --watch"
-  },
-  "dependencies": {
-    "json-server": "^0.17.0"
-  }
-}

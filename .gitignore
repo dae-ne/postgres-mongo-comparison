@@ -1,1 +1,8 @@
+.idea/
 node_modules/
+mongo-data/
+postgres-data/
+**/seed/postgres/*.csv
+**/seed/mongo/init.json
+queries/
+
