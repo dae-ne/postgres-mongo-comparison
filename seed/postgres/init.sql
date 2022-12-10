@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS fdc;
 
 CREATE DATABASE fdc;
 
+\connect fdc
+
 CREATE TABLE food (
    fdc_id INT PRIMARY KEY,
    data_type TEXT,
@@ -23,3 +25,6 @@ CREATE TABLE branded_food (
    market_country TEXT,
    trade_channel TEXT
 );
+
+\copy food from '/seed/food.csv' delimiter ',' csv header;
+-- \copy branded_food from '/seed/branded_food.csv' delimiter ',' csv header;

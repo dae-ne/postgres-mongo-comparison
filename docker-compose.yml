@@ -8,26 +8,15 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
     ports:
       - 27017:27017
-    volumes:
-      - ./mongo-data:/data/db
   
   mongo-seed:
     build:
       context: ./seed/mongo
       dockerfile: Dockerfile
-      # args:
-      #   DATABASE_URI: mongodb://localhost:27017/ztb
-      #   USERNAME: root
-      #   PASSWORD: rootpassword
-    depends_on:
-      - mongodb
 
   postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    build:
+      context: ./seed/postgres
+      dockerfile: Dockerfile
     ports:
       - 5432:5432
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
