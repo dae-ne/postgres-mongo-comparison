@@ -2,7 +2,7 @@
 
 ```
 pip install -r requirements.txt
-py ./seed-init.py
+py ./seed_init.py
 docker-compose up
 ```
 
