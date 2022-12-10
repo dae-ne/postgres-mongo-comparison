@@ -1,4 +1,8 @@
 .idea/
 **/seed/postgres/*.csv
-**/seed/mongo/init.json
+**/seed/postgres/*.pdf
+**/seed/mongo/*.json
+**/*.zip
 queries/
+**/seed2/*
+**/seed3/*
