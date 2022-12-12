@@ -1,10 +1,12 @@
-import requests
-from zipfile import ZipFile
-import shutil
-from tqdm.auto import tqdm
 import functools
-import pandas as pd
 import json
+import shutil
+from zipfile import ZipFile
+
+import pandas as pd
+import requests
+from tqdm.auto import tqdm
+
 
 BASE_PATH = './seed'
 POSTGRES_BASE_PATH = f'{BASE_PATH}/postgres/'
@@ -24,6 +26,7 @@ TABLE_NAMES = [
     # {'fdc_id', 'brand_owner', 'gtin_upc', 'ingredients', 'serving_size', 'serving_size_unit', 'branded_food_category', 'data_source', 'modified_date', 'available_date', 'market_country', 'trade_channel'}
 ]
 
+
 def download_files(file_names, output_paths):
     base_url = 'https://fdc.nal.usda.gov/fdc-datasets/'
     for file, path in zip(file_names, output_paths):
@@ -35,7 +38,7 @@ def download_files(file_names, output_paths):
         if r.status_code != 200:
             r.raise_for_status()
             raise RuntimeError(f"Request to {url} returned status code {r.status_code}")
-        
+
         file_size = int(r.headers.get('Content-Length'))
         r.raw.read = functools.partial(r.raw.read, decode_content=True)
 
@@ -43,11 +46,13 @@ def download_files(file_names, output_paths):
             with open(path + file, 'wb') as f:
                 shutil.copyfileobj(raw, f)
 
+
 def unzip_files(file_names, paths):
     for file, path in zip(file_names, paths):
         print(file)
         with ZipFile(path + file, 'r') as zipobj:
             zipobj.extractall(path=path)
+
 
 def prepare_json_files(file_path):
     data = {}
@@ -58,6 +63,7 @@ def prepare_json_files(file_path):
     with open(file_path, 'w', encoding='utf8') as file_write:
         file_write.write(json.dumps(data['BrandedFoods']))
 
+
 def prepare_csv_files(file_paths, table_names):
     for file_path, tables in zip(file_paths, table_names):
         print(file_path)
@@ -66,6 +72,7 @@ def prepare_csv_files(file_paths, table_names):
         for column in column_names.difference(tables):
             df.drop(column, inplace=True, axis=1)
         df.to_csv(file_path, index=False)
+
 
 print('[start] downloading data...')
 download_files(FILE_NAMES, PATHS)
