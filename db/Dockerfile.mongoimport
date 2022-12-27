@@ -1,0 +1,10 @@
+FROM mongo:latest
+
+WORKDIR /seed
+
+COPY ./seed/*.csv .
+COPY init_mongo.sh .
+
+RUN chmod 777 init_mongo.sh
+
+CMD ["sh", "init_mongo.sh"]

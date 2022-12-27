@@ -1,2 +1,5 @@
 requests
 tqdm
+pandas
+StrEnum
+pathlib

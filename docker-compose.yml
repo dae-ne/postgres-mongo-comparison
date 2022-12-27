@@ -2,21 +2,22 @@ version: '3.8'
 
 services:
   mongodb:
-    image: mongo:latest
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    build:
+      context: ./db
+      dockerfile: Dockerfile.mongodb
     ports:
       - 27017:27017
   
-  mongo-seed:
+  mongoimport:
     build:
-      context: ./seed/mongo
-      dockerfile: Dockerfile
+      context: ./db
+      dockerfile: Dockerfile.mongoimport
+    depends_on:
+      - mongodb
 
   postgres:
     build:
-      context: ./seed/postgres
-      dockerfile: Dockerfile
+      context: ./db
+      dockerfile: Dockerfile.postgres
     ports:
       - 5432:5432

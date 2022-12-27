@@ -1,0 +1,14 @@
+FROM postgres:latest
+
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD postgres
+
+WORKDIR /seed
+COPY ./seed/*.csv .
+RUN chmod 777 *
+
+WORKDIR /docker-entrypoint-initdb.d
+COPY init_postgres.sql .
+RUN chmod 777 *.sql
+
+EXPOSE 5432

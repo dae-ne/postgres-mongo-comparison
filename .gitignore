@@ -1,8 +1,9 @@
-.idea/
-**/seed/postgres/*.csv
-**/seed/postgres/*.pdf
-**/seed/mongo/*.json
 **/*.zip
-queries/
-**/seed2/*
-**/seed3/*
+**/seed/*.csv
+**/seed/*.pdf
+test/
+api/dist/
+api/package-lock.json
+**/node_modules/
+.idea/
+.vscode/
