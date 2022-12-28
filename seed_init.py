@@ -118,8 +118,7 @@ def main():
             'data_source',
             'modified_date',
             'available_date',
-            'market_country',
-            'trade_channel'
+            'market_country'
         },
         # 'food_attribute_type.csv': {
         #     'id',
