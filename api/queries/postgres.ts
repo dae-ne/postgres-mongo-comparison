@@ -1,86 +1,63 @@
-import { Pool } from 'pg';
-import { Count } from '../models/Count';
+import { createPostgresDbPool } from '../config/db';
+import { Quantity } from '../models/quantity';
 
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'fdc',
-  password: 'postgres',
-  port: 5432,
-});
+type RowsNumber = Omit<Quantity, 'name'>;
 
-const countRows = async (tableName: string): Promise<Count> => {
+const pool = createPostgresDbPool();
+
+const countRows = async (tableName: string): Promise<Quantity> => {
   const query = `SELECT COUNT(*) FROM ${tableName}`;
-  const { rows } = await pool.query<Count>(query);
-  return rows[0];
+  const { rows } = await pool.query<RowsNumber>(query);
+  return {
+    ...rows[0],
+    name: tableName
+  };
 };
 
-export const countFood = async (): Promise<Count> => {
+const getData = async (query: string, limit: number) => {
+  const params = [limit];
+  const { rows } = await pool.query(query, params);
+  return rows;
+};
+
+export const countFood = async (): Promise<Quantity> => {
   const tableName = 'food';
-  const result: Count = {
-    name: tableName,
-    ...await countRows(tableName)
-  }
-  return result;
+  return countRows(tableName);
 };
 
-export const countBrandedFood = async (): Promise<Count> => {
+export const countBrandedFood = async (): Promise<Quantity> => {
   const tableName = 'branded_food';
-  const result: Count = {
-    name: tableName,
-    ...await countRows(tableName)
-  }
-  return result;
+  return countRows(tableName);
 };
 
-export const countNutrient = async (): Promise<Count> => {
+export const countNutrient = async (): Promise<Quantity> => {
   const tableName = 'nutrient';
-  const result: Count = {
-    name: tableName,
-    ...await countRows(tableName)
-  }
-  return result;
+  return countRows(tableName);
 };
 
-export const countFoodNutrient = async (): Promise<Count> => {
+export const countFoodNutrient = async (): Promise<Quantity> => {
   const tableName = 'food_nutrient';
-  const result: Count = {
-    name: tableName,
-    ...await countRows(tableName)
-  }
-  return result;
+  return countRows(tableName);
 };
 
-export const countFoodNutrientDerivation = async (): Promise<Count> => {
+export const countFoodNutrientDerivation = async (): Promise<Quantity> => {
   const tableName = 'food_nutrient_derivation';
-  const result: Count = {
-    name: tableName,
-    ...await countRows(tableName)
-  }
-  return result;
+  return countRows(tableName);
 };
 
-export const countFoodNutrientSource = async (): Promise<Count> => {
+export const countFoodNutrientSource = async (): Promise<Quantity> => {
   const tableName = 'food_nutrient_source';
-  const result: Count = {
-    name: tableName,
-    ...await countRows(tableName)
-  }
-  return result;
+  return countRows(tableName);
 };
 
 export const getFood = async (limit: number) => {
   const query = 'SELECT * FROM food LIMIT $1';
-  const params = [limit];
-  const { rows } = await pool.query(query, params);
-  return rows;
+  return getData(query, limit);
 };
 
 export const getFullFood = async (limit: number) => {
   const query = 'SELECT * FROM food JOIN branded_food USING (fdc_id) LIMIT $1';
-  const params = [limit];
-  const { rows } = await pool.query(query, params);
-  return rows;
+  return getData(query, limit);
 };
 
 export const getFullFoodWithNeutrients = async (limit: number) => {
@@ -99,11 +76,8 @@ export const getFullFoodWithNeutrients = async (limit: number) => {
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
     GROUP BY f.fdc_id, bf.fdc_id
-    LIMIT $1;
-    `;
-  const params = [limit];
-  const { rows } = await pool.query(query, params);
-  return rows;
+    LIMIT $1;`;
+  return getData(query, limit);
 };
 
 export const getFullFoodWithFullNeutrients = async (limit: number) => {
@@ -119,8 +93,8 @@ export const getFullFoodWithFullNeutrients = async (limit: number) => {
           row_to_json(fndt) food_nutrient_derivation
       FROM (
           SELECT
-              fnd.*,
-              row_to_json(fns) food_nutrient_source
+            fnd.*,
+            row_to_json(fns) food_nutrient_source
           FROM food_nutrient_derivation fnd
           LEFT JOIN food_nutrient_source fns ON fnd.source_id = fns.id
       ) fndt
@@ -130,9 +104,6 @@ export const getFullFoodWithFullNeutrients = async (limit: number) => {
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
     GROUP BY f.fdc_id, bf.fdc_id
-    LIMIT $1;
-    `;
-  const params = [limit];
-  const { rows } = await pool.query(query, params);
-  return rows;
+    LIMIT $1;`;
+  return getData(query, limit);
 };
