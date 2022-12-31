@@ -14,7 +14,7 @@ app.get('/ping', (_: Request, res: Response) => {
   res.send('Hi!');
 });
 
-app.use(express.json());
+//app.use(express.json());
 
 app.use('/', statsRouter);
 app.use('/postgres', postgresRouter);
