@@ -4,7 +4,7 @@
 - python *(tested with 3.10)*
 - Docker Desktop
 
-## Install and run
+## Install and Run
 
 ### Linux and MacOS
 ```bash
