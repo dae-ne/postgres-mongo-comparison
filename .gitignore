@@ -1,8 +1,9 @@
 **/*.zip
 **/seed/*.csv
 **/seed/*.pdf
-.env
-api/dist/
-api/package-lock.json
+**/.env
+**/dist/
 **/node_modules/
-.idea/
+**/.idea/
+
+api/package-lock.json

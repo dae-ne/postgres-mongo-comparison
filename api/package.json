@@ -6,8 +6,9 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "lint": "eslint --ext .js,.ts .",
-    "format": "prettier --write \"**/*.+(js|ts|json|yaml)\""
+    "lint": "eslint ./ --ext .js,.ts",
+    "lint:fix": "eslint ./ --fix --ext .js,.ts",
+    "format": "prettier --write \"**/*.+(js|ts|json)\""
   },
   "dependencies": {
     "dotenv": "^16.0.3",
@@ -23,6 +24,7 @@
     "@typescript-eslint/parser": "^5.47.1",
     "concurrently": "^7.6.0",
     "eslint": "^8.31.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.1",

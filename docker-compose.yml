@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   mongodb:
@@ -20,7 +20,7 @@ services:
       args:
         USERNAME: $DB_USERNAME
         PASSWORD: $DB_PASSWORD
-    volumes: 
+    volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432

@@ -1,23 +1,23 @@
-select
+SELECT
     f.*,
     bf.*,
     json_agg(fnt) food_nutrient
-from (
-    select
+FROM (
+    SELECT
         fn.*,
         row_to_json(n) nutrient,
         row_to_json(fndt) food_nutrient_derivation
-    from (
-        select
+    FROM (
+        SELECT
             fnd.*,
             row_to_json(fns) food_nutrient_source
-        from food_nutrient_derivation fnd
-        left join food_nutrient_source fns on fnd.source_id = fns.id
+        FROM food_nutrient_derivation fnd
+        LEFT JOIN food_nutrient_source fns ON fnd.source_id = fns.id
     ) fndt
-    right join food_nutrient fn on fndt.id = fn.derivation_id
-    left join nutrient n on fn.nutrient_id = n.id
+    RIGHT JOIN food_nutrient fn ON fndt.id = fn.derivation_id
+    LEFT JOIN nutrient n ON fn.nutrient_id = n.id
 ) fnt
-right join food f using (fdc_id)
-left join branded_food bf using (fdc_id)
-group by f.fdc_id, bf.fdc_id
-limit 2;
+RIGHT JOIN food f USING (fdc_id)
+LEFT JOIN branded_food bf USING (fdc_id)
+GROUP BY f.fdc_id, bf.fdc_id
+LIMIT 3;
