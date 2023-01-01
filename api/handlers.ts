@@ -6,7 +6,7 @@ export const handleGetStatsRequest = async (
   res: Response,
   sqlQuery: (limit: number) => Promise<any[]>,
   //noSqlQuery: <T extends unknown>(limit: number) => T,
-  sqlCountQuery: () => Promise<Quantity>,
+  sqlCountQuery: () => Promise<Quantity>
   // noSqlCountQuery: () => Promise<Count>
 ) => {
   let executionTimes: number[] = [];

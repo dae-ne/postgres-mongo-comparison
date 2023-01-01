@@ -10,7 +10,7 @@ const countRows = async (tableName: string): Promise<Quantity> => {
   const { rows } = await pool.query<RowsNumber>(query);
   return {
     ...rows[0],
-    name: tableName
+    name: tableName,
   };
 };
 
@@ -61,8 +61,7 @@ export const getFullFood = async (limit: number) => {
 };
 
 export const getFullFoodWithNeutrients = async (limit: number) => {
-  const query =
-    `SELECT
+  const query = `SELECT
       f.*,
       bf.*,
       json_agg(fnt) food_nutrient
@@ -81,8 +80,7 @@ export const getFullFoodWithNeutrients = async (limit: number) => {
 };
 
 export const getFullFoodWithFullNeutrients = async (limit: number) => {
-  const query =
-    `SELECT
+  const query = `SELECT
       f.*,
       bf.*,
       json_agg(fnt) food_nutrient

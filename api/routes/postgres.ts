@@ -9,7 +9,7 @@ import {
   getFood,
   getFullFood,
   getFullFoodWithFullNeutrients,
-  getFullFoodWithNeutrients
+  getFullFoodWithNeutrients,
 } from '../queries/postgres';
 
 const router = express.Router();
@@ -64,4 +64,4 @@ router.get(`/${getFullFoodWithFullNeutrients.name}`, async (_: Request, res: Res
   res.json(data);
 });
 
-export { router }
+export { router };

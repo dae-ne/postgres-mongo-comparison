@@ -42,7 +42,7 @@ def print_info(xd: str, text: str, color: Colors):
 
 #         if not q.exists():
 #             all_exist = False
-    
+
 #     return all_exist
 
 
@@ -84,7 +84,7 @@ def prepare_data(data: Dict[str, Set[str]]):
         for column in csv_columns.difference(columns):
             print_info('removed column:', column, Colors.BOLD)
             df.drop(column, inplace=True, axis=1)
-        
+
         df.to_csv(file_path, index=False)
 
 

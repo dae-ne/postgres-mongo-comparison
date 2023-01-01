@@ -6,4 +6,3 @@ api/dist/
 api/package-lock.json
 **/node_modules/
 .idea/
-.vscode/

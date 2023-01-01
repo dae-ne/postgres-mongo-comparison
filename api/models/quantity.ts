@@ -1,4 +1,4 @@
 export interface Quantity {
-  name: string,
-  count: number
+  name: string;
+  count: number;
 }
