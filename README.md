@@ -31,13 +31,13 @@ docker-compose up
 ```
 
 ##  Mongo
-- **username:** user *(default)*\
-- **password:** password *(default)*\
+- **username:** user *(default)*
+- **password:** password *(default)*
 - **port:** 27017
 
 ##  Postgres
-- **username:** user *(default)*\
-- **password:** password *(default)*\
+- **username:** user *(default)*
+- **password:** password *(default)*
 - **port:** 5432
 
 ## License
