@@ -22,8 +22,8 @@ CREATE TABLE branded_food (
    data_source TEXT,
    modified_date DATE,
    available_date DATE,
-   market_country TEXT,
-   trade_channel TEXT
+   market_country TEXT
+   -- trade_channel TEXT
 );
 
 -- CREATE TABLE food_attribute_type (

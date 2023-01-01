@@ -5,31 +5,25 @@ services:
     build:
       context: ./db
       dockerfile: Dockerfile.mongodb
+      args:
+        USERNAME: $DB_USERNAME
+        PASSWORD: $DB_PASSWORD
     volumes:
       - mongo-data:/data/db
     ports:
       - 27017:27017
-  
-  mongoimport:
-    build:
-      context: ./db
-      dockerfile: Dockerfile.mongoimport
-    depends_on:
-      - mongodb
 
   postgres:
     build:
       context: ./db
       dockerfile: Dockerfile.postgres
+      args:
+        USERNAME: $DB_USERNAME
+        PASSWORD: $DB_PASSWORD
     volumes: 
       - postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
 
 volumes:
   mongo-data:

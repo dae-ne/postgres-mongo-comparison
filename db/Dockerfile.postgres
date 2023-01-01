@@ -1,14 +1,20 @@
 FROM postgres:latest
 
-ENV POSTGRES_USER postgres
-ENV POSTGRES_PASSWORD postgres
+ARG USERNAME
+ARG PASSWORD
+
+ENV POSTGRES_USER $USERNAME
+ENV POSTGRES_PASSWORD $PASSWORD
 
 WORKDIR /seed
+
 COPY ./seed/*.csv .
-RUN chmod 777 *
+RUN chmod 777 *.csv
+RUN chmod 777 ./
 
 WORKDIR /docker-entrypoint-initdb.d
+
 COPY init_postgres.sql .
-RUN chmod 777 *.sql
+COPY postinit.sh .
 
 EXPOSE 5432

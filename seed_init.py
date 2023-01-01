@@ -1,12 +1,13 @@
 import functools
 import shutil
+from pathlib import Path
+from typing import List, Dict, Set
+from zipfile import ZipFile
+
 import pandas as pd
 import requests
-from zipfile import ZipFile
-from tqdm.auto import tqdm
 from strenum import StrEnum
-from typing import List, Dict, Set
-from pathlib import Path
+from tqdm.auto import tqdm
 
 
 BASE_PATH = './db/seed/'
@@ -91,8 +92,8 @@ def remove_files(files: List[str]):
     for file in files:
         print_info('file:', file, Colors.BOLD)
         file_path = f'{BASE_PATH}{file}'
-        file_to_rem = Path(file_path)
-        file_to_rem.unlink()
+        file_to_remove = Path(file_path)
+        file_to_remove.unlink()
 
 
 def main():

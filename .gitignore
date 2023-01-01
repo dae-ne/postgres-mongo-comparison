@@ -1,7 +1,7 @@
 **/*.zip
 **/seed/*.csv
 **/seed/*.pdf
-test/
+.env
 api/dist/
 api/package-lock.json
 **/node_modules/
