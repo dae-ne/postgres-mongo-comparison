@@ -1,4 +1,4 @@
-FROM node:18.9.0-alpine
+FROM node:18.12.1-alpine
 
 WORKDIR /usr/src/app
 
@@ -8,4 +8,4 @@ RUN npm install
 RUN npm run build
 
 EXPOSE 8000
-CMD [ "npm", "start" ]
+CMD npm start

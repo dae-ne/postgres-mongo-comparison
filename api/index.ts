@@ -1,23 +1,67 @@
-import dotenv from 'dotenv';
+import { config as configEnv } from 'dotenv';
 import express, { Request, Response } from 'express';
+import { appConfig } from './config/app';
+import { closeMongoDbConnection, connectToMongoDb, MongoDb } from './connections/mongo';
+import { connectToPostgresDb, PostgresDb } from './connections/postgres';
 import { router as mongoRouter } from './routes/mongo';
 import { router as postgresRouter } from './routes/postgres';
-import { router as statsRouter } from './routes/stats';
+import { router as statsRouter } from './routes/stats.js';
 
-dotenv.config();
+configEnv();
 
-const app = express();
-// const port = process.env.PORT;
-const port = 8000;
+const runOnActions = (callback: () => Promise<void>, ...events: string[]) => {
+  events.forEach((e) => {
+    process.on(e, callback);
+  });
+};
 
-app.get('/ping', (_: Request, res: Response) => {
-  res.send('Hi!');
-});
+const main = async () => {
+  const app = express();
+  const { port } = appConfig;
 
-app.use('/', statsRouter);
-app.use('/postgres', postgresRouter);
-app.use('/mongo', mongoRouter);
+  app.get('/ping', (_: Request, res: Response) => {
+    res.send('Hi!');
+  });
 
-app.listen(port, () => {
-  console.log('⚡️ Server is running: \x1b[34m%s\x1b[0m', `http://localhost:${port}`);
-});
+  app.use('/', statsRouter);
+  app.use('/postgres', postgresRouter);
+  app.use('/mongo', mongoRouter);
+
+  let postgresDb: PostgresDb | undefined;
+  let mongoDb: MongoDb | undefined;
+
+  const closeConnections = async () => {
+    console.log('closing connections');
+    postgresDb?.end();
+    closeMongoDbConnection();
+  };
+
+  runOnActions(
+    closeConnections,
+    'cleanup',
+    'exit',
+    'SIGINT',
+    'SIGUSR1',
+    'SIGUSR2',
+    'uncaughtException'
+  );
+
+  try {
+    postgresDb = connectToPostgresDb();
+    mongoDb = await connectToMongoDb();
+
+    app.locals = {
+      ...app.locals,
+      postgresDb,
+      mongoDb
+    };
+
+    app.listen(port, () => {
+      console.log('⚡️ Server is running: \x1b[34m%s\x1b[0m', `http://localhost:${port}`);
+    });
+  } catch {
+    await closeConnections();
+  }
+};
+
+main();

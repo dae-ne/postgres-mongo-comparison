@@ -1,66 +1,64 @@
-import { createPostgresDbPool } from '../config/db';
-import { Quantity } from '../models/quantity';
+import { PostgresDb } from '../connections/postgres';
+import { Quantity } from '../models/Quantity';
 
 type RowsNumber = Omit<Quantity, 'name'>;
 
-const pool = createPostgresDbPool();
-
-const countRows = async (tableName: string): Promise<Quantity> => {
+const countRows = async (db: PostgresDb, tableName: string): Promise<Quantity> => {
   const query = `SELECT COUNT(*) FROM ${tableName}`;
-  const { rows } = await pool.query<RowsNumber>(query);
+  const { rows } = await db.query<RowsNumber>(query);
   return {
     ...rows[0],
-    name: tableName,
+    name: tableName
   };
 };
 
-const getData = async (query: string, limit: number) => {
+const getData = async (db: PostgresDb, query: string, limit: number) => {
   const params = [limit];
-  const { rows } = await pool.query(query, params);
+  const { rows } = await db.query(query, params);
   return rows;
 };
 
-export const countFood = async (): Promise<Quantity> => {
+export const countFood = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'food';
-  return countRows(tableName);
+  return countRows(db, tableName);
 };
 
-export const countBrandedFood = async (): Promise<Quantity> => {
+export const countBrandedFood = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'branded_food';
-  return countRows(tableName);
+  return countRows(db, tableName);
 };
 
-export const countNutrient = async (): Promise<Quantity> => {
+export const countNutrient = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'nutrient';
-  return countRows(tableName);
+  return countRows(db, tableName);
 };
 
-export const countFoodNutrient = async (): Promise<Quantity> => {
+export const countFoodNutrient = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'food_nutrient';
-  return countRows(tableName);
+  return countRows(db, tableName);
 };
 
-export const countFoodNutrientDerivation = async (): Promise<Quantity> => {
+export const countFoodNutrientDerivation = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'food_nutrient_derivation';
-  return countRows(tableName);
+  return countRows(db, tableName);
 };
 
-export const countFoodNutrientSource = async (): Promise<Quantity> => {
+export const countFoodNutrientSource = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'food_nutrient_source';
-  return countRows(tableName);
+  return countRows(db, tableName);
 };
 
-export const getFood = async (limit: number) => {
+export const getFood = async (db: PostgresDb, limit: number) => {
   const query = 'SELECT * FROM food LIMIT $1';
-  return getData(query, limit);
+  return getData(db, query, limit);
 };
 
-export const getFullFood = async (limit: number) => {
+export const getFullFood = async (db: PostgresDb, limit: number) => {
   const query = 'SELECT * FROM food JOIN branded_food USING (fdc_id) LIMIT $1';
-  return getData(query, limit);
+  return getData(db, query, limit);
 };
 
-export const getFullFoodWithNeutrients = async (limit: number) => {
+export const getFullFoodWithNeutrients = async (db: PostgresDb, limit: number) => {
   const query = `SELECT
       f.*,
       bf.*,
@@ -76,10 +74,10 @@ export const getFullFoodWithNeutrients = async (limit: number) => {
     LEFT JOIN branded_food bf USING (fdc_id)
     GROUP BY f.fdc_id, bf.fdc_id
     LIMIT $1;`;
-  return getData(query, limit);
+  return getData(db, query, limit);
 };
 
-export const getFullFoodWithFullNeutrients = async (limit: number) => {
+export const getFullFoodWithFullNeutrients = async (db: PostgresDb, limit: number) => {
   const query = `SELECT
       f.*,
       bf.*,
@@ -103,5 +101,5 @@ export const getFullFoodWithFullNeutrients = async (limit: number) => {
     LEFT JOIN branded_food bf USING (fdc_id)
     GROUP BY f.fdc_id, bf.fdc_id
     LIMIT $1;`;
-  return getData(query, limit);
+  return getData(db, query, limit);
 };
