@@ -1,5 +1,5 @@
 import { config as configEnv } from 'dotenv';
-import express, { Request, Response } from 'express';
+import express, { Response } from 'express';
 import { appConfig } from './config/app';
 import { closeMongoDbConnection, connectToMongoDb, MongoDb } from './connections/mongo';
 import { connectToPostgresDb, PostgresDb } from './connections/postgres';
@@ -9,7 +9,7 @@ import { router as statsRouter } from './routes/stats.js';
 
 configEnv();
 
-const runOnActions = (callback: () => Promise<void>, ...events: string[]) => {
+const runOnEvents = (callback: () => Promise<void>, ...events: string[]) => {
   events.forEach((e) => {
     process.on(e, callback);
   });
@@ -19,7 +19,7 @@ const main = async () => {
   const app = express();
   const { port } = appConfig;
 
-  app.get('/ping', (_: Request, res: Response) => {
+  app.get('/ping', (_, res: Response) => {
     res.send('Hi!');
   });
 
@@ -36,7 +36,7 @@ const main = async () => {
     closeMongoDbConnection();
   };
 
-  runOnActions(
+  runOnEvents(
     closeConnections,
     'cleanup',
     'exit',
