@@ -7,8 +7,8 @@ import { router as mongoRouter } from './domain/mongo/routing';
 import { connectToPostgresDb, PostgresDb } from './domain/postgres/db';
 import { router as postgresRouter } from './domain/postgres/routing';
 import { router as statsRouter } from './domain/stats/routing.js';
-import { logger } from './infrastructure/logging';
 import { loggerMiddleware } from './infrastructure/middleware';
+import { logger } from './utils/logging';
 
 config();
 
