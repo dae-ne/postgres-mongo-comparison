@@ -13,3 +13,15 @@ export const loggerMiddleware = (req: Request, res: Response, next: NextFunction
 
   next();
 };
+
+export const errorHandlerMiddleware = (
+  err: Error,
+  req: Request,
+  res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  next: NextFunction
+) => {
+  const { message } = err;
+  logger.error(message);
+  res.status(500).send({ error: message });
+};

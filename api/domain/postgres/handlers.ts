@@ -15,8 +15,16 @@ export const handlePostgresGetRequest = async (
   callback: (postgres: PostgresDb, page: number, size: number) => Promise<void>
 ) => {
   const { postgresDb } = req.app.locals;
-  const { page, size } = getPaginationParams(req.params);
-  const pageValue = page ? +page : 0;
-  const sizeValue = size ? +size : 30;
-  await callback(postgresDb, pageValue, sizeValue);
+  const { page, size } = getPaginationParams(req.query);
+  await callback(postgresDb, page, size);
+};
+
+export const handlePostgresGetByIdRequest = async (
+  req: Request,
+  callback: (postgres: PostgresDb, page: number, size: number, id: number) => Promise<void>
+) => {
+  const { id } = req.params;
+  const { postgresDb } = req.app.locals;
+  const defaultQueryParam = 1;
+  await callback(postgresDb, defaultQueryParam, defaultQueryParam, +id);
 };

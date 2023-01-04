@@ -15,25 +15,25 @@ const formatDate = (date: Date) =>
     date.getMinutes()
   )}:${twoZerosPad(date.getSeconds())}`;
 
-const getMessageWithDateTime = (...message: string[]) => {
+const getMessageWithDateTime = (...message: string[] | number[]) => {
   const date = new Date();
   const formattedDate = `[${formatDate(date)}]`.padEnd(DATE_TIME_PAD_LENGTH);
   return `${formattedDate} ${message.join(' ')}`;
 };
 
-const logInfo = (...message: string[]) =>
+const logInfo = (...message: string[] | number[]) =>
   console.log(
     `${COLOR_GREEN}[INFO]${COLOR_RESET}`.padEnd(PREFIX_PAD_LENGTH),
     getMessageWithDateTime(...message)
   );
 
-const logWarning = (...message: string[]) =>
+const logWarning = (...message: string[] | number[]) =>
   console.log(
     `${COLOR_YELLOW}[WARNING]${COLOR_RESET}`.padEnd(PREFIX_PAD_LENGTH),
     getMessageWithDateTime(...message)
   );
 
-const logError = (...message: string[]) =>
+const logError = (...message: string[] | number[]) =>
   console.log(
     `${COLOR_RED}[ERROR]${COLOR_RESET}`.padEnd(PREFIX_PAD_LENGTH),
     getMessageWithDateTime(...message)

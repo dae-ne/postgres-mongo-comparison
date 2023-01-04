@@ -3,6 +3,8 @@ import { Quantity } from '../models';
 
 type RowsNumber = Omit<Quantity, 'name'>;
 
+const createWhereClause = (id?: number) => (id ? `WHERE fdc_id = ${id}` : '');
+
 const countRows = async (db: PostgresDb, tableName: string): Promise<Quantity> => {
   const query = `SELECT COUNT(*) FROM ${tableName}`;
   const { rows } = await db.query<RowsNumber>(query);
@@ -48,20 +50,33 @@ export const countPostgresFoodNutrientSource = async (db: PostgresDb): Promise<Q
   return countRows(db, tableName);
 };
 
-export const getPostgresFood = async (db: PostgresDb, offset: number, limit: number) => {
-  const query = 'SELECT * FROM food OFFSET $1 LIMIT $2';
+export const getPostgresFood = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number,
+  id: number | undefined = undefined
+) => {
+  const query = `SELECT * FROM food ${createWhereClause(id)} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
 
-export const getPostgresFullFood = async (db: PostgresDb, offset: number, limit: number) => {
-  const query = 'SELECT * FROM food JOIN branded_food USING (fdc_id) OFFSET $1 LIMIT $2';
+export const getPostgresFullFood = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number,
+  id: number | undefined = undefined
+) => {
+  const query = `SELECT * FROM food JOIN branded_food USING (fdc_id) ${createWhereClause(
+    id
+  )} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
 
 export const getPostgresFullFoodWithNutrients = async (
   db: PostgresDb,
   offset: number,
-  limit: number
+  limit: number,
+  id: number | undefined = undefined
 ) => {
   const query = `
     SELECT
@@ -80,6 +95,7 @@ export const getPostgresFullFoodWithNutrients = async (
     ) fnt
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
+    ${createWhereClause(id)}
     GROUP BY f.fdc_id, bf.fdc_id
     OFFSET $1
     LIMIT $2;`;
@@ -90,7 +106,8 @@ export const getPostgresFullFoodWithNutrients = async (
 export const getPostgresFullFoodWithFullNutrients = async (
   db: PostgresDb,
   offset: number,
-  limit: number
+  limit: number,
+  id: number | undefined = undefined
 ) => {
   const query = `
     SELECT
@@ -98,7 +115,7 @@ export const getPostgresFullFoodWithFullNutrients = async (
       bf.*,
       json_agg((
         SELECT x
-        FROM (SELECT fnt.id, fnt.amount, fnt.derivation_id, fnt.nutrient) x
+        FROM (SELECT fnt.id, fnt.amount, fnt.derivation_id, fnt.nutrient, fnt.food_nutrient_derivation) x
       )) food_nutrient
     FROM (
       SELECT
@@ -117,6 +134,7 @@ export const getPostgresFullFoodWithFullNutrients = async (
     ) fnt
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
+    ${createWhereClause(id)}
     GROUP BY f.fdc_id, bf.fdc_id
     OFFSET $1
     LIMIT $2;`;

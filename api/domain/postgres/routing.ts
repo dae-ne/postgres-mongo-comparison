@@ -1,6 +1,10 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { PostgresDb } from './db';
-import { handlePostgresCountRequest, handlePostgresGetRequest } from './handlers';
+import {
+  handlePostgresCountRequest,
+  handlePostgresGetByIdRequest,
+  handlePostgresGetRequest
+} from './handlers';
 import {
   countPostgresBrandedFood,
   countPostgresFood,
@@ -29,12 +33,32 @@ const registerCountEndpoint = (method: (db: PostgresDb) => Promise<Quantity>) =>
 const registerGetEndpoint = (
   method: (db: PostgresDb, offset: number, limit: number) => Promise<object[]>
 ) => {
-  router.get(`/${method.name}`, async (req: Request, res: Response) => {
-    await handlePostgresGetRequest(req, async (db, page, size) => {
-      const offset = (page - 1) * size;
-      const data = await method(db, offset, size);
-      res.json(data);
-    });
+  router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await handlePostgresGetRequest(req, async (db, page, size) => {
+        const offset = (page - 1) * size;
+        const data = await method(db, offset, size);
+        res.json(data);
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+};
+
+const registerGetByIdEndpoint = (
+  method: (db: PostgresDb, offset: number, limit: number, id: number) => Promise<object[]>
+) => {
+  router.get(`/${method.name}/:id`, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await handlePostgresGetByIdRequest(req, async (db, page, size, id) => {
+        const offset = (page - 1) * size;
+        const data = await method(db, offset, size, id);
+        res.json(data);
+      });
+    } catch (error) {
+      next(error);
+    }
   });
 };
 
@@ -49,3 +73,8 @@ registerGetEndpoint(getPostgresFood);
 registerGetEndpoint(getPostgresFullFood);
 registerGetEndpoint(getPostgresFullFoodWithNutrients);
 registerGetEndpoint(getPostgresFullFoodWithFullNutrients);
+
+registerGetByIdEndpoint(getPostgresFood);
+registerGetByIdEndpoint(getPostgresFullFood);
+registerGetByIdEndpoint(getPostgresFullFoodWithNutrients);
+registerGetByIdEndpoint(getPostgresFullFoodWithFullNutrients);

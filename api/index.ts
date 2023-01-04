@@ -7,7 +7,7 @@ import { router as mongoRouter } from './domain/mongo/routing';
 import { connectToPostgresDb, PostgresDb } from './domain/postgres/db';
 import { router as postgresRouter } from './domain/postgres/routing';
 import { router as statsRouter } from './domain/stats/routing.js';
-import { loggerMiddleware } from './infrastructure/middleware';
+import { errorHandlerMiddleware, loggerMiddleware } from './infrastructure/middlewares';
 import { logger } from './utils/logging';
 
 config();
@@ -64,7 +64,7 @@ const main = async () => {
   };
 
   const handleUncaughtException = () => {
-    logger.error('error occourred, closing app');
+    logger.error('uncaught error occourred, closing app');
     exit(1);
   };
 
@@ -76,6 +76,8 @@ const main = async () => {
   app.use(loggerMiddleware);
 
   setUpRoutes(app);
+
+  app.use(errorHandlerMiddleware);
 
   app.locals = {
     ...app.locals,
