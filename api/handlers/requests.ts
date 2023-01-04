@@ -35,6 +35,7 @@ export const handleGetStatsRequest = async (
   sqlCountQuery: (db: PostgresDb) => Promise<Quantity>
   // noSqlCountQuery: () => Promise<Count>
 ) => {
+  // TODO: remove eslint-disable-next-line
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   await handleRequest(req, async (postgres, mongo) => {
     const executionTimes: number[] = [];
@@ -42,6 +43,7 @@ export const handleGetStatsRequest = async (
 
     for (let i = 1; i <= numberOfRows; i += 100000) {
       const start = Date.now();
+      // TODO: remove eslint-disable-next-line
       // eslint-disable-next-line no-await-in-loop
       await sqlQuery(postgres, i);
       const elapsed = Date.now() - start;
