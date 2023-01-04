@@ -11,12 +11,23 @@ export const handleRequest = async (
   await callback(postgresDb, mongoDb);
 };
 
-export const handlePostgresRequest = async (
+export const handlePostgresCountRequest = async (
   req: Request,
   callback: (postgres: PostgresDb) => Promise<void>
 ) => {
   const { postgresDb } = req.app.locals;
   await callback(postgresDb);
+};
+
+export const handlePostgresGetRequest = async (
+  req: Request,
+  callback: (postgres: PostgresDb, page: number, size: number) => Promise<void>
+) => {
+  const { postgresDb } = req.app.locals;
+  const { page, size } = req.query;
+  const pageValue = page ? +page : 0;
+  const sizeValue = size ? +size : 30;
+  await callback(postgresDb, pageValue, sizeValue);
 };
 
 export const handleMongoRequest = async (
@@ -30,7 +41,7 @@ export const handleMongoRequest = async (
 export const handleGetStatsRequest = async (
   req: Request,
   res: Response,
-  sqlQuery: (db: PostgresDb, limit: number) => Promise<object[]>,
+  sqlQuery: (db: PostgresDb, page: number, size: number) => Promise<object[]>,
   // noSqlQuery: <T extends unknown>(limit: number) => T,
   sqlCountQuery: (db: PostgresDb) => Promise<Quantity>
   // noSqlCountQuery: () => Promise<Count>
@@ -45,7 +56,7 @@ export const handleGetStatsRequest = async (
       const start = Date.now();
       // TODO: remove eslint-disable-next-line
       // eslint-disable-next-line no-await-in-loop
-      await sqlQuery(postgres, i);
+      await sqlQuery(postgres, 1, i);
       const elapsed = Date.now() - start;
       executionTimes.push(elapsed);
     }

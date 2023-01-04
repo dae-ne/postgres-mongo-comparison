@@ -1,5 +1,7 @@
 import express, { Request, Response } from 'express';
-import { handlePostgresRequest } from '../handlers/requests';
+import { PostgresDb } from '../connections/postgres';
+import { handlePostgresCountRequest, handlePostgresGetRequest } from '../handlers/requests';
+import { Quantity } from '../models/Quantity';
 import {
   countPostgresBrandedFood,
   countPostgresFood,
@@ -13,78 +15,37 @@ import {
   getPostgresFullFoodWithNutrients
 } from '../queries/postgres';
 
-const router = express.Router();
+export const router = express.Router();
 
-// TODO: registerEndpoint method
-
-router.get(`/${countPostgresFood.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const count = await countPostgresFood(db);
-    res.json(count);
+const registerCountEndpoint = (method: (db: PostgresDb) => Promise<Quantity>) => {
+  router.get(`/${method.name}`, async (req: Request, res: Response) => {
+    await handlePostgresCountRequest(req, async (db) => {
+      const count = await method(db);
+      res.json(count);
+    });
   });
-});
+};
 
-router.get(`/${countPostgresBrandedFood.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const count = await countPostgresBrandedFood(db);
-    res.json(count);
+const registerGetEndpoint = (
+  method: (db: PostgresDb, offset: number, limit: number) => Promise<object[]>
+) => {
+  router.get(`/${method.name}`, async (req: Request, res: Response) => {
+    await handlePostgresGetRequest(req, async (db, page, size) => {
+      const offset = (page - 1) * size;
+      const data = await method(db, offset, size);
+      res.json(data);
+    });
   });
-});
+};
 
-router.get(`/${countPostgresNutrient.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const count = await countPostgresNutrient(db);
-    res.json(count);
-  });
-});
+registerCountEndpoint(countPostgresFood);
+registerCountEndpoint(countPostgresBrandedFood);
+registerCountEndpoint(countPostgresNutrient);
+registerCountEndpoint(countPostgresFoodNutrient);
+registerCountEndpoint(countPostgresFoodNutrientDerivation);
+registerCountEndpoint(countPostgresFoodNutrientSource);
 
-router.get(`/${countPostgresFoodNutrient.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const count = await countPostgresFood(db);
-    res.json(count);
-  });
-});
-
-router.get(`/${countPostgresFoodNutrientDerivation.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const count = await countPostgresFoodNutrientDerivation(db);
-    res.json(count);
-  });
-});
-
-router.get(`/${countPostgresFoodNutrientSource.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const count = await countPostgresFoodNutrientSource(db);
-    res.json(count);
-  });
-});
-
-router.get(`/${getPostgresFood.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const data = await getPostgresFood(db, 1);
-    res.json(data);
-  });
-});
-
-router.get(`/${getPostgresFullFood.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const data = await getPostgresFullFood(db, 1);
-    res.json(data);
-  });
-});
-
-router.get(`/${getPostgresFullFoodWithNutrients.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const data = await getPostgresFullFoodWithNutrients(db, 1);
-    res.json(data);
-  });
-});
-
-router.get(`/${getPostgresFullFoodWithFullNutrients.name}`, async (req: Request, res: Response) => {
-  await handlePostgresRequest(req, async (db) => {
-    const data = await getPostgresFullFoodWithFullNutrients(db, 1);
-    res.json(data);
-  });
-});
-
-export { router };
+registerGetEndpoint(getPostgresFood);
+registerGetEndpoint(getPostgresFullFood);
+registerGetEndpoint(getPostgresFullFoodWithNutrients);
+registerGetEndpoint(getPostgresFullFoodWithFullNutrients);

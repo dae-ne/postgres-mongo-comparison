@@ -12,8 +12,8 @@ const countRows = async (db: PostgresDb, tableName: string): Promise<Quantity> =
   };
 };
 
-const getData = async (db: PostgresDb, query: string, limit: number) => {
-  const params = [limit];
+const getData = async (db: PostgresDb, query: string, offset: number, limit: number) => {
+  const params = [offset, limit];
   const { rows } = await db.query(query, params);
   return rows;
 };
@@ -48,18 +48,23 @@ export const countPostgresFoodNutrientSource = async (db: PostgresDb): Promise<Q
   return countRows(db, tableName);
 };
 
-export const getPostgresFood = async (db: PostgresDb, limit: number) => {
-  const query = 'SELECT * FROM food LIMIT $1';
-  return getData(db, query, limit);
+export const getPostgresFood = async (db: PostgresDb, offset: number, limit: number) => {
+  const query = 'SELECT * FROM food OFFSET $1 LIMIT $2';
+  return getData(db, query, offset, limit);
 };
 
-export const getPostgresFullFood = async (db: PostgresDb, limit: number) => {
-  const query = 'SELECT * FROM food JOIN branded_food USING (fdc_id) LIMIT $1';
-  return getData(db, query, limit);
+export const getPostgresFullFood = async (db: PostgresDb, offset: number, limit: number) => {
+  const query = 'SELECT * FROM food JOIN branded_food USING (fdc_id) OFFSET $1 LIMIT $2';
+  return getData(db, query, offset, limit);
 };
 
-export const getPostgresFullFoodWithNutrients = async (db: PostgresDb, limit: number) => {
-  const query = `SELECT
+export const getPostgresFullFoodWithNutrients = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number
+) => {
+  const query = `
+    SELECT
       f.*,
       bf.*,
       json_agg((
@@ -76,13 +81,19 @@ export const getPostgresFullFoodWithNutrients = async (db: PostgresDb, limit: nu
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
     GROUP BY f.fdc_id, bf.fdc_id
-    LIMIT $1;`;
-  return getData(db, query, limit);
+    OFFSET $1
+    LIMIT $2;`;
+  return getData(db, query, offset, limit);
 };
 
 // TODO: improve query
-export const getPostgresFullFoodWithFullNutrients = async (db: PostgresDb, limit: number) => {
-  const query = `SELECT
+export const getPostgresFullFoodWithFullNutrients = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number
+) => {
+  const query = `
+    SELECT
       f.*,
       bf.*,
       json_agg((
@@ -107,6 +118,7 @@ export const getPostgresFullFoodWithFullNutrients = async (db: PostgresDb, limit
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
     GROUP BY f.fdc_id, bf.fdc_id
-    LIMIT $1;`;
-  return getData(db, query, limit);
+    OFFSET $1
+    LIMIT $2;`;
+  return getData(db, query, offset, limit);
 };
