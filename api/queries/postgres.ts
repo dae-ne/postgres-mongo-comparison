@@ -18,51 +18,54 @@ const getData = async (db: PostgresDb, query: string, limit: number) => {
   return rows;
 };
 
-export const countFood = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresFood = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'food';
   return countRows(db, tableName);
 };
 
-export const countBrandedFood = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresBrandedFood = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'branded_food';
   return countRows(db, tableName);
 };
 
-export const countNutrient = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresNutrient = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'nutrient';
   return countRows(db, tableName);
 };
 
-export const countFoodNutrient = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresFoodNutrient = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'food_nutrient';
   return countRows(db, tableName);
 };
 
-export const countFoodNutrientDerivation = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresFoodNutrientDerivation = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'food_nutrient_derivation';
   return countRows(db, tableName);
 };
 
-export const countFoodNutrientSource = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresFoodNutrientSource = async (db: PostgresDb): Promise<Quantity> => {
   const tableName = 'food_nutrient_source';
   return countRows(db, tableName);
 };
 
-export const getFood = async (db: PostgresDb, limit: number) => {
+export const getPostgresFood = async (db: PostgresDb, limit: number) => {
   const query = 'SELECT * FROM food LIMIT $1';
   return getData(db, query, limit);
 };
 
-export const getFullFood = async (db: PostgresDb, limit: number) => {
+export const getPostgresFullFood = async (db: PostgresDb, limit: number) => {
   const query = 'SELECT * FROM food JOIN branded_food USING (fdc_id) LIMIT $1';
   return getData(db, query, limit);
 };
 
-export const getFullFoodWithNeutrients = async (db: PostgresDb, limit: number) => {
+export const getPostgresFullFoodWithNutrients = async (db: PostgresDb, limit: number) => {
   const query = `SELECT
       f.*,
       bf.*,
-      json_agg(fnt) food_nutrient
+      json_agg((
+        SELECT x
+        FROM (SELECT fnt.id, fnt.amount, fnt.derivation_id, fnt.nutrient) x
+      )) food_nutrient
     FROM (
       SELECT
         fn.*,
@@ -77,22 +80,26 @@ export const getFullFoodWithNeutrients = async (db: PostgresDb, limit: number) =
   return getData(db, query, limit);
 };
 
-export const getFullFoodWithFullNeutrients = async (db: PostgresDb, limit: number) => {
+// TODO: improve query
+export const getPostgresFullFoodWithFullNutrients = async (db: PostgresDb, limit: number) => {
   const query = `SELECT
       f.*,
       bf.*,
-      json_agg(fnt) food_nutrient
+      json_agg((
+        SELECT x
+        FROM (SELECT fnt.id, fnt.amount, fnt.derivation_id, fnt.nutrient) x
+      )) food_nutrient
     FROM (
       SELECT
-          fn.*,
-          row_to_json(n) nutrient,
-          row_to_json(fndt) food_nutrient_derivation
+        fn.*,
+        row_to_json(n) nutrient,
+        row_to_json(fndt) food_nutrient_derivation
       FROM (
-          SELECT
-            fnd.*,
-            row_to_json(fns) food_nutrient_source
-          FROM food_nutrient_derivation fnd
-          LEFT JOIN food_nutrient_source fns ON fnd.source_id = fns.id
+        SELECT
+          fnd.*,
+          row_to_json(fns) food_nutrient_source
+        FROM food_nutrient_derivation fnd
+        LEFT JOIN food_nutrient_source fns ON fnd.source_id = fns.id
       ) fndt
       RIGHT JOIN food_nutrient fn ON fndt.id = fn.derivation_id
       LEFT JOIN nutrient n ON fn.nutrient_id = n.id

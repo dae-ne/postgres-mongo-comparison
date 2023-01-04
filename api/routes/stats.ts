@@ -1,29 +1,31 @@
 import express, { Request, Response } from 'express';
 import { handleGetStatsRequest } from '../handlers/requests';
 import {
-  countFood,
-  getFood,
-  getFullFood,
-  getFullFoodWithFullNeutrients,
-  getFullFoodWithNeutrients
+  countPostgresFood,
+  getPostgresFood,
+  getPostgresFullFood,
+  getPostgresFullFoodWithFullNutrients,
+  getPostgresFullFoodWithNutrients
 } from '../queries/postgres';
 
 const router = express.Router();
 
-router.get(`/${getFood.name}Stats`, async (req: Request, res: Response) =>
-  handleGetStatsRequest(req, res, getFood, countFood)
+router.get(`/${getPostgresFood.name}Stats`, async (req: Request, res: Response) =>
+  handleGetStatsRequest(req, res, getPostgresFood, countPostgresFood)
 );
 
-router.get(`/${getFullFood.name}Stats`, async (req: Request, res: Response) =>
-  handleGetStatsRequest(req, res, getFullFood, countFood)
+router.get(`/${getPostgresFullFood.name}Stats`, async (req: Request, res: Response) =>
+  handleGetStatsRequest(req, res, getPostgresFullFood, countPostgresFood)
 );
 
-router.get(`/${getFullFoodWithNeutrients.name}Stats`, async (req: Request, res: Response) =>
-  handleGetStatsRequest(req, res, getFullFoodWithNeutrients, countFood)
+router.get(`/${getPostgresFullFoodWithNutrients.name}Stats`, async (req: Request, res: Response) =>
+  handleGetStatsRequest(req, res, getPostgresFullFoodWithNutrients, countPostgresFood)
 );
 
-router.get(`/${getFullFoodWithFullNeutrients.name}Stats`, async (req: Request, res: Response) =>
-  handleGetStatsRequest(req, res, getFullFoodWithFullNeutrients, countFood)
+router.get(
+  `/${getPostgresFullFoodWithFullNutrients.name}Stats`,
+  async (req: Request, res: Response) =>
+    handleGetStatsRequest(req, res, getPostgresFullFoodWithFullNutrients, countPostgresFood)
 );
 
 export { router };

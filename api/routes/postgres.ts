@@ -1,86 +1,88 @@
 import express, { Request, Response } from 'express';
 import { handlePostgresRequest } from '../handlers/requests';
 import {
-  countBrandedFood,
-  countFood,
-  countFoodNutrient,
-  countFoodNutrientDerivation,
-  countFoodNutrientSource,
-  countNutrient,
-  getFood,
-  getFullFood,
-  getFullFoodWithFullNeutrients,
-  getFullFoodWithNeutrients
+  countPostgresBrandedFood,
+  countPostgresFood,
+  countPostgresFoodNutrient,
+  countPostgresFoodNutrientDerivation,
+  countPostgresFoodNutrientSource,
+  countPostgresNutrient,
+  getPostgresFood,
+  getPostgresFullFood,
+  getPostgresFullFoodWithFullNutrients,
+  getPostgresFullFoodWithNutrients
 } from '../queries/postgres';
 
 const router = express.Router();
 
-router.get(`/${countFood.name}`, async (req: Request, res: Response) => {
+// TODO: registerEndpoint method
+
+router.get(`/${countPostgresFood.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const count = await countFood(db);
+    const count = await countPostgresFood(db);
     res.json(count);
   });
 });
 
-router.get(`/${countBrandedFood.name}`, async (req: Request, res: Response) => {
+router.get(`/${countPostgresBrandedFood.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const count = await countBrandedFood(db);
+    const count = await countPostgresBrandedFood(db);
     res.json(count);
   });
 });
 
-router.get(`/${countNutrient.name}`, async (req: Request, res: Response) => {
+router.get(`/${countPostgresNutrient.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const count = await countNutrient(db);
+    const count = await countPostgresNutrient(db);
     res.json(count);
   });
 });
 
-router.get(`/${countFoodNutrient.name}`, async (req: Request, res: Response) => {
+router.get(`/${countPostgresFoodNutrient.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const count = await countFood(db);
+    const count = await countPostgresFood(db);
     res.json(count);
   });
 });
 
-router.get(`/${countFoodNutrientDerivation.name}`, async (req: Request, res: Response) => {
+router.get(`/${countPostgresFoodNutrientDerivation.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const count = await countFoodNutrientDerivation(db);
+    const count = await countPostgresFoodNutrientDerivation(db);
     res.json(count);
   });
 });
 
-router.get(`/${countFoodNutrientSource.name}`, async (req: Request, res: Response) => {
+router.get(`/${countPostgresFoodNutrientSource.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const count = await countFoodNutrientSource(db);
+    const count = await countPostgresFoodNutrientSource(db);
     res.json(count);
   });
 });
 
-router.get(`/${getFood.name}`, async (req: Request, res: Response) => {
+router.get(`/${getPostgresFood.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const data = await getFood(db, 1);
+    const data = await getPostgresFood(db, 1);
     res.json(data);
   });
 });
 
-router.get(`/${getFullFood.name}`, async (req: Request, res: Response) => {
+router.get(`/${getPostgresFullFood.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const data = await getFullFood(db, 1);
+    const data = await getPostgresFullFood(db, 1);
     res.json(data);
   });
 });
 
-router.get(`/${getFullFoodWithNeutrients.name}`, async (req: Request, res: Response) => {
+router.get(`/${getPostgresFullFoodWithNutrients.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const data = await getFullFoodWithNeutrients(db, 1);
+    const data = await getPostgresFullFoodWithNutrients(db, 1);
     res.json(data);
   });
 });
 
-router.get(`/${getFullFoodWithFullNeutrients.name}`, async (req: Request, res: Response) => {
+router.get(`/${getPostgresFullFoodWithFullNutrients.name}`, async (req: Request, res: Response) => {
   await handlePostgresRequest(req, async (db) => {
-    const data = await getFullFoodWithFullNeutrients(db, 1);
+    const data = await getPostgresFullFoodWithFullNutrients(db, 1);
     res.json(data);
   });
 });
