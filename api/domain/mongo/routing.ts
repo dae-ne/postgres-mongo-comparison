@@ -1,42 +1,101 @@
-import express, { Request, Response } from 'express';
-import { handleMongoRequest } from './handlers';
+import express, { NextFunction, Request, Response } from 'express';
+import { MongoDb } from './db';
 import {
+  handleMongoCountRequest,
+  handleMongoGetByIdRequest,
+  handleMongoGetRequest
+} from './handlers';
+import {
+  countMongoBrandedFood,
   countMongoFood,
+  countMongoFoodNutrient,
+  countMongoFoodNutrientDerivation,
+  countMongoFoodNutrientSource,
+  countMongoNutrient,
+  getMongoBrandedFood,
   getMongoFood,
+  getMongoFoodNutrient,
+  getMongoFoodNutrientDerivation,
+  getMongoFoodNutrientSource,
   getMongoFullFood,
-  getMongoFullFoodWithNutrients
+  getMongoFullFoodWithFullNutrients,
+  getMongoFullFoodWithNutrients,
+  getMongoNutrient
 } from './queries';
+import { Quantity } from '../models';
 
-const router = express.Router();
+export const router = express.Router();
 
-// TODO: registerEndpoint method
-
-router.get(`/${countMongoFood.name}`, async (req: Request, res: Response) => {
-  await handleMongoRequest(req, async (db) => {
-    const count = await countMongoFood(db);
-    res.json(count);
+const registerCountEndpoint = (method: (db: MongoDb) => Promise<Quantity>) => {
+  router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await handleMongoCountRequest(req, async (db) => {
+        const count = await method(db);
+        res.json(count);
+      });
+    } catch (error) {
+      next(error);
+    }
   });
-});
+};
 
-router.get(`/${getMongoFood.name}`, async (req: Request, res: Response) => {
-  await handleMongoRequest(req, async (db) => {
-    const count = await getMongoFood(db, 1);
-    res.json(count);
+const registerGetEndpoint = (
+  method: (db: MongoDb, offset: number, limit: number) => Promise<object[]>
+) => {
+  router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await handleMongoGetRequest(req, async (db, page, size) => {
+        const skip = (page - 1) * size;
+        const data = await method(db, skip, size);
+        res.json(data);
+      });
+    } catch (error) {
+      next(error);
+    }
   });
-});
+};
 
-router.get(`/${getMongoFullFood.name}`, async (req: Request, res: Response) => {
-  await handleMongoRequest(req, async (db) => {
-    const count = await getMongoFullFood(db, 1);
-    res.json(count);
+const registerGetByIdEndpoint = (
+  method: (db: MongoDb, offset: number, limit: number, id: number) => Promise<object[]>
+) => {
+  router.get(`/${method.name}/:id`, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await handleMongoGetByIdRequest(req, async (db, page, size, id) => {
+        const skip = (page - 1) * size;
+        const data = await method(db, skip, size, id);
+        res.json(data);
+      });
+    } catch (error) {
+      next(error);
+    }
   });
-});
+};
 
-router.get(`/${getMongoFullFoodWithNutrients.name}`, async (req: Request, res: Response) => {
-  await handleMongoRequest(req, async (db) => {
-    const count = await getMongoFullFoodWithNutrients(db, 1);
-    res.json(count);
-  });
-});
+registerCountEndpoint(countMongoFood);
+registerCountEndpoint(countMongoBrandedFood);
+registerCountEndpoint(countMongoNutrient);
+registerCountEndpoint(countMongoFoodNutrient);
+registerCountEndpoint(countMongoFoodNutrientDerivation);
+registerCountEndpoint(countMongoFoodNutrientSource);
 
-export { router };
+registerGetEndpoint(getMongoFood);
+registerGetEndpoint(getMongoBrandedFood);
+registerGetEndpoint(getMongoNutrient);
+registerGetEndpoint(getMongoFoodNutrient);
+registerGetEndpoint(getMongoFoodNutrientDerivation);
+registerGetEndpoint(getMongoFoodNutrientSource);
+
+registerGetEndpoint(getMongoFullFood);
+registerGetEndpoint(getMongoFullFoodWithNutrients);
+registerGetEndpoint(getMongoFullFoodWithFullNutrients);
+
+registerGetByIdEndpoint(getMongoFood);
+registerGetByIdEndpoint(getMongoBrandedFood);
+registerGetByIdEndpoint(getMongoNutrient);
+registerGetByIdEndpoint(getMongoFoodNutrient);
+registerGetByIdEndpoint(getMongoFoodNutrientDerivation);
+registerGetByIdEndpoint(getMongoFoodNutrientSource);
+
+registerGetByIdEndpoint(getMongoFullFood);
+registerGetByIdEndpoint(getMongoFullFoodWithNutrients);
+registerGetByIdEndpoint(getMongoFullFoodWithFullNutrients);

@@ -3,7 +3,9 @@ import { Quantity } from '../models';
 
 type RowsNumber = Omit<Quantity, 'name'>;
 
-const createWhereClause = (id?: number) => (id ? `WHERE fdc_id = ${id}` : '');
+const createWhereFdcIdClause = (id?: number) => (id ? `WHERE fdc_id = ${id}` : '');
+
+const createWhereIdClause = (id?: number) => (id ? `WHERE id = ${id}` : '');
 
 const countRows = async (db: PostgresDb, tableName: string): Promise<Quantity> => {
   const query = `SELECT COUNT(*) FROM ${tableName}`;
@@ -56,7 +58,59 @@ export const getPostgresFood = async (
   limit: number,
   id: number | undefined = undefined
 ) => {
-  const query = `SELECT * FROM food ${createWhereClause(id)} OFFSET $1 LIMIT $2`;
+  const query = `SELECT * FROM food ${createWhereFdcIdClause(id)} OFFSET $1 LIMIT $2`;
+  return getData(db, query, offset, limit);
+};
+
+export const getPostgresBrandedFood = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number,
+  id: number | undefined = undefined
+) => {
+  const query = `SELECT * FROM branded_food ${createWhereFdcIdClause(id)} OFFSET $1 LIMIT $2`;
+  return getData(db, query, offset, limit);
+};
+
+export const getPostgresNutrient = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number,
+  id: number | undefined = undefined
+) => {
+  const query = `SELECT * FROM nutrient ${createWhereIdClause(id)} OFFSET $1 LIMIT $2`;
+  return getData(db, query, offset, limit);
+};
+
+export const getPostgresFoodNutrient = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number,
+  id: number | undefined = undefined
+) => {
+  const query = `SELECT * FROM food_nutrient ${createWhereIdClause(id)} OFFSET $1 LIMIT $2`;
+  return getData(db, query, offset, limit);
+};
+
+export const getPostgresFoodNutrientDerivation = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number,
+  id: number | undefined = undefined
+) => {
+  const query = `SELECT * FROM food_nutrient_derivation ${createWhereIdClause(
+    id
+  )} OFFSET $1 LIMIT $2`;
+  return getData(db, query, offset, limit);
+};
+
+export const getPostgresFoodNutrientSource = async (
+  db: PostgresDb,
+  offset: number,
+  limit: number,
+  id: number | undefined = undefined
+) => {
+  const query = `SELECT * FROM food_nutrient_source ${createWhereIdClause(id)} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
 
@@ -66,7 +120,7 @@ export const getPostgresFullFood = async (
   limit: number,
   id: number | undefined = undefined
 ) => {
-  const query = `SELECT * FROM food JOIN branded_food USING (fdc_id) ${createWhereClause(
+  const query = `SELECT * FROM food JOIN branded_food USING (fdc_id) ${createWhereFdcIdClause(
     id
   )} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
@@ -95,7 +149,7 @@ export const getPostgresFullFoodWithNutrients = async (
     ) fnt
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
-    ${createWhereClause(id)}
+    ${createWhereFdcIdClause(id)}
     GROUP BY f.fdc_id, bf.fdc_id
     OFFSET $1
     LIMIT $2;`;
@@ -134,7 +188,7 @@ export const getPostgresFullFoodWithFullNutrients = async (
     ) fnt
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
-    ${createWhereClause(id)}
+    ${createWhereFdcIdClause(id)}
     GROUP BY f.fdc_id, bf.fdc_id
     OFFSET $1
     LIMIT $2;`;

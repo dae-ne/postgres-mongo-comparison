@@ -23,9 +23,9 @@ const setUpRoutes = (app: Express) => {
     res.send('ok');
   });
 
-  app.use('/', statsRouter);
   app.use('/', postgresRouter);
   app.use('/', mongoRouter);
+  app.use('/', statsRouter);
 
   app.get('/', (_, res: Response) => {
     let endpoints: string[] = [];
@@ -33,7 +33,7 @@ const setUpRoutes = (app: Express) => {
     routers.forEach((router) => {
       endpoints = [...endpoints, ...router.stack.map((r) => r.route.path)];
     });
-    res.status(200).send(endpoints);
+    res.send(endpoints);
   });
 };
 
