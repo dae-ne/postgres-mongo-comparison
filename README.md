@@ -7,6 +7,8 @@
 
 ## Install and Run
 
+Clone the repository, then...
+
 ### Linux and MacOS
 
 ```bash
