@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { MongoDb } from '../connections/mongo';
-import { PostgresDb } from '../connections/postgres';
-import { Quantity } from '../models/Quantity';
+import { Quantity } from '../models';
+import { MongoDb } from '../mongo/db';
+import { PostgresDb } from '../postgres/db';
 
 export const handleRequest = async (
   req: Request,
@@ -9,33 +9,6 @@ export const handleRequest = async (
 ) => {
   const { postgresDb, mongoDb } = req.app.locals;
   await callback(postgresDb, mongoDb);
-};
-
-export const handlePostgresCountRequest = async (
-  req: Request,
-  callback: (postgres: PostgresDb) => Promise<void>
-) => {
-  const { postgresDb } = req.app.locals;
-  await callback(postgresDb);
-};
-
-export const handlePostgresGetRequest = async (
-  req: Request,
-  callback: (postgres: PostgresDb, page: number, size: number) => Promise<void>
-) => {
-  const { postgresDb } = req.app.locals;
-  const { page, size } = req.query;
-  const pageValue = page ? +page : 0;
-  const sizeValue = size ? +size : 30;
-  await callback(postgresDb, pageValue, sizeValue);
-};
-
-export const handleMongoRequest = async (
-  req: Request,
-  callback: (mongo: MongoDb) => Promise<void>
-) => {
-  const { mongoDb } = req.app.locals;
-  await callback(mongoDb);
 };
 
 export const handleGetStatsRequest = async (

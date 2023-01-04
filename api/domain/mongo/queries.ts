@@ -1,5 +1,5 @@
-import { MongoDb } from '../connections/mongo';
-import { Quantity } from '../models/Quantity';
+import { MongoDb } from './db';
+import { Quantity } from '../models';
 
 export const countMongoFood = async (db: MongoDb): Promise<Quantity> => {
   const name = 'food';

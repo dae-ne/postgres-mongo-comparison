@@ -1,12 +1,12 @@
 import express, { Request, Response } from 'express';
-import { handleGetStatsRequest } from '../handlers/requests';
+import { handleGetStatsRequest } from './handlers';
 import {
   countPostgresFood,
   getPostgresFood,
   getPostgresFullFood,
   getPostgresFullFoodWithFullNutrients,
   getPostgresFullFoodWithNutrients
-} from '../queries/postgres';
+} from '../postgres/queries';
 
 const router = express.Router();
 

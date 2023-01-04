@@ -1,11 +1,11 @@
 import express, { Request, Response } from 'express';
-import { handleMongoRequest } from '../handlers/requests';
+import { handleMongoRequest } from './handlers';
 import {
   countMongoFood,
   getMongoFood,
   getMongoFullFood,
   getMongoFullFoodWithNutrients
-} from '../queries/mongo';
+} from './queries';
 
 const router = express.Router();
 

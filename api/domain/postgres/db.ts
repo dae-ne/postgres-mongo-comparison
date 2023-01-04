@@ -1,5 +1,5 @@
 import { Pool, PoolConfig } from 'pg';
-import { postgresConfig } from '../config/db';
+import { postgresConfig } from '../../config/db';
 
 export type PostgresDb = Pool;
 

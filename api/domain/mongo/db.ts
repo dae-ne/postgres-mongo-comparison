@@ -1,5 +1,5 @@
 import { Db, MongoClient } from 'mongodb';
-import { mongoConfig } from '../config/db';
+import { mongoConfig } from '../../config/db';
 
 export type MongoDb = Db;
 

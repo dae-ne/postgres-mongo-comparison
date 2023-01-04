@@ -1,5 +1,5 @@
-import { PostgresDb } from '../connections/postgres';
-import { Quantity } from '../models/Quantity';
+import { PostgresDb } from './db';
+import { Quantity } from '../models';
 
 type RowsNumber = Omit<Quantity, 'name'>;
 

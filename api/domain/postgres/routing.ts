@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
-import { PostgresDb } from '../connections/postgres';
-import { handlePostgresCountRequest, handlePostgresGetRequest } from '../handlers/requests';
-import { Quantity } from '../models/Quantity';
+import { PostgresDb } from './db';
+import { handlePostgresCountRequest, handlePostgresGetRequest } from './handlers';
 import {
   countPostgresBrandedFood,
   countPostgresFood,
@@ -13,7 +12,8 @@ import {
   getPostgresFullFood,
   getPostgresFullFoodWithFullNutrients,
   getPostgresFullFoodWithNutrients
-} from '../queries/postgres';
+} from './queries';
+import { Quantity } from '../models';
 
 export const router = express.Router();
 

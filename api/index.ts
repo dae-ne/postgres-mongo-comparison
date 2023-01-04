@@ -2,13 +2,13 @@ import { config } from 'dotenv';
 import express, { Express, Response } from 'express';
 import { exit } from 'process';
 import { appConfig } from './config/app';
-import { closeMongoDbConnection, connectToMongoDb, MongoDb } from './connections/mongo';
-import { connectToPostgresDb, PostgresDb } from './connections/postgres';
-import { logger } from './library/logging';
-import { loggerMiddleware } from './middlewares';
-import { router as mongoRouter } from './routes/mongo';
-import { router as postgresRouter } from './routes/postgres';
-import { router as statsRouter } from './routes/stats.js';
+import { closeMongoDbConnection, connectToMongoDb, MongoDb } from './domain/mongo/db';
+import { router as mongoRouter } from './domain/mongo/routing';
+import { connectToPostgresDb, PostgresDb } from './domain/postgres/db';
+import { router as postgresRouter } from './domain/postgres/routing';
+import { router as statsRouter } from './domain/stats/routing.js';
+import { logger } from './infrastructure/logging';
+import { loggerMiddleware } from './infrastructure/middleware';
 
 config();
 
