@@ -3,7 +3,7 @@ import { Quantity } from '../models';
 
 const countDocuments = async (db: MongoDb, collectionName: string): Promise<Quantity> => {
   const count = await db.collection(collectionName).countDocuments();
-  return { count, name: collectionName };
+  return { name: collectionName, count };
 };
 
 const getDataFilteredByFdcId = async (

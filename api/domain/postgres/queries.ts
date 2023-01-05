@@ -11,8 +11,8 @@ const countRows = async (db: PostgresDb, tableName: string): Promise<Quantity> =
   const query = `SELECT COUNT(*) FROM ${tableName}`;
   const { rows } = await db.query<RowsNumber>(query);
   return {
-    ...rows[0],
-    name: tableName
+    name: tableName,
+    count: +rows[0].count
   };
 };
 

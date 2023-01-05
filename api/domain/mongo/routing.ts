@@ -63,7 +63,7 @@ const registerGetByIdEndpoint = (
       await handleMongoGetByIdRequest(req, async (db, page, size, id) => {
         const skip = (page - 1) * size;
         const data = await method(db, skip, size, id);
-        res.json(data);
+        res.json(data[0]);
       });
     } catch (error) {
       next(error);

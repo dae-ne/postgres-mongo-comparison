@@ -63,7 +63,7 @@ const registerGetByIdEndpoint = (
       await handlePostgresGetByIdRequest(req, async (db, page, size, id) => {
         const offset = (page - 1) * size;
         const data = await method(db, offset, size, id);
-        res.json(data);
+        res.json(data[0]);
       });
     } catch (error) {
       next(error);

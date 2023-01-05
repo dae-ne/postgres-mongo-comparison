@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import express, { Express, Response } from 'express';
+import express, { Express } from 'express';
 import { exit } from 'process';
 import { appConfig } from './config/app';
 import { closeMongoDbConnection, connectToMongoDb, MongoDb } from './domain/mongo/db';
@@ -12,14 +12,16 @@ import { logger } from './utils/logging';
 
 config();
 
-const handleEvents = (callback: () => Promise<void>, ...events: string[]) => {
+type EventCallbackType = (() => Promise<void>) | ((error: Error) => Promise<void>);
+
+const handleEvents = (callback: EventCallbackType, ...events: string[]) => {
   events.forEach((e) => {
     process.on(e, callback);
   });
 };
 
 const setUpRoutes = (app: Express) => {
-  app.get('/_health', (_, res: Response) => {
+  app.get('/_health', (_, res) => {
     res.send('ok');
   });
 
@@ -27,13 +29,17 @@ const setUpRoutes = (app: Express) => {
   app.use('/', mongoRouter);
   app.use('/', statsRouter);
 
-  app.get('/', (_, res: Response) => {
-    let endpoints: string[] = [];
-    const routers = [statsRouter, postgresRouter, mongoRouter];
-    routers.forEach((router) => {
-      endpoints = [...endpoints, ...router.stack.map((r) => r.route.path)];
-    });
-    res.send(endpoints);
+  // app.get('/', (_, res) => {
+  //   let endpoints: string[] = [];
+  //   const routers = [statsRouter, postgresRouter, mongoRouter];
+  //   routers.forEach((router) => {
+  //     endpoints = [...endpoints, ...router.stack.map((r) => r.route.path)];
+  //   });
+  //   res.send(endpoints);
+  // });
+
+  app.get('*', (_, res) => {
+    res.status(404).send({ message: '404 - not found' });
   });
 };
 
@@ -63,8 +69,8 @@ const main = async () => {
     logger.info('closing app');
   };
 
-  const handleUncaughtException = () => {
-    logger.error('uncaught error occourred, closing app');
+  const handleUncaughtException = (error: Error) => {
+    logger.error(error.message);
     exit(1);
   };
 
