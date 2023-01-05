@@ -74,7 +74,7 @@ const main = async () => {
     exit(1);
   };
 
-  handleEvents(cleanup, 'exit', 'SIGINT', 'SIGUSR1', 'SIGUSR2');
+  handleEvents(cleanup, 'exit', 'beforeExit', 'SIGINT', 'SIGUSR1', 'SIGUSR2');
   handleEvents(handleUncaughtException, 'uncaughtException');
 
   await connectToDatabases();

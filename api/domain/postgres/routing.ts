@@ -22,7 +22,8 @@ import {
   getPostgresFullFoodWithNutrients,
   getPostgresNutrient
 } from './queries';
-import { Quantity } from '../models';
+import { PaginatedResponse } from '../../contracts/PaginatedResponse';
+import { Quantity } from '../models/Quantity';
 
 export const router = express.Router();
 
@@ -40,14 +41,24 @@ const registerCountEndpoint = (method: (db: PostgresDb) => Promise<Quantity>) =>
 };
 
 const registerGetEndpoint = (
-  method: (db: PostgresDb, offset: number, limit: number) => Promise<object[]>
+  method: (db: PostgresDb, offset: number, limit: number) => Promise<object[]>,
+  countMethod: (db: PostgresDb) => Promise<Quantity>
 ) => {
   router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handlePostgresGetRequest(req, async (db, page, size) => {
         const offset = (page - 1) * size;
         const data = await method(db, offset, size);
-        res.json(data);
+        const { count: total } = await countMethod(db);
+
+        const response: PaginatedResponse = {
+          count: data.length,
+          page,
+          total,
+          data
+        };
+
+        res.json(response);
       });
     } catch (error) {
       next(error);
@@ -78,16 +89,16 @@ registerCountEndpoint(countPostgresFoodNutrient);
 registerCountEndpoint(countPostgresFoodNutrientDerivation);
 registerCountEndpoint(countPostgresFoodNutrientSource);
 
-registerGetEndpoint(getPostgresFood);
-registerGetEndpoint(getPostgresBrandedFood);
-registerGetEndpoint(getPostgresNutrient);
-registerGetEndpoint(getPostgresFoodNutrient);
-registerGetEndpoint(getPostgresFoodNutrientDerivation);
-registerGetEndpoint(getPostgresFoodNutrientSource);
+registerGetEndpoint(getPostgresFood, countPostgresFood);
+registerGetEndpoint(getPostgresBrandedFood, countPostgresBrandedFood);
+registerGetEndpoint(getPostgresNutrient, countPostgresNutrient);
+registerGetEndpoint(getPostgresFoodNutrient, countPostgresFoodNutrient);
+registerGetEndpoint(getPostgresFoodNutrientDerivation, countPostgresFoodNutrientDerivation);
+registerGetEndpoint(getPostgresFoodNutrientSource, countPostgresFoodNutrientSource);
 
-registerGetEndpoint(getPostgresFullFood);
-registerGetEndpoint(getPostgresFullFoodWithNutrients);
-registerGetEndpoint(getPostgresFullFoodWithFullNutrients);
+registerGetEndpoint(getPostgresFullFood, countPostgresFood);
+registerGetEndpoint(getPostgresFullFoodWithNutrients, countPostgresFood);
+registerGetEndpoint(getPostgresFullFoodWithFullNutrients, countPostgresFood);
 
 registerGetByIdEndpoint(getPostgresFood);
 registerGetByIdEndpoint(getPostgresBrandedFood);

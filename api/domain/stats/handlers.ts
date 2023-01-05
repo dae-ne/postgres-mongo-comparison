@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Quantity } from '../models';
+import { Quantity } from '../models/Quantity';
 import { MongoDb } from '../mongo/db';
 import { PostgresDb } from '../postgres/db';
 
