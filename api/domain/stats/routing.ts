@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { handleGetStatsRequest } from './handlers';
 import { Quantity } from '../../models/Quantity';
 import { MongoDb } from '../mongo/db';
@@ -47,17 +47,21 @@ const registerStatsEndpoint = async (
   postgresCountQuery: (db: PostgresDb) => Promise<Quantity>,
   mongoCountQuery: (db: MongoDb) => Promise<Quantity>
 ) => {
-  router.get(`/${methodName}`, async (req: Request, res: Response) =>
-    handleGetStatsRequest(
-      req,
-      res,
-      methodName,
-      postgresQuery,
-      mongoQuery,
-      postgresCountQuery,
-      mongoCountQuery
-    )
-  );
+  router.get(`/${methodName}`, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      handleGetStatsRequest(
+        req,
+        res,
+        methodName,
+        postgresQuery,
+        mongoQuery,
+        postgresCountQuery,
+        mongoCountQuery
+      );
+    } catch (error) {
+      next(error);
+    }
+  });
 };
 
 registerStatsEndpoint(
