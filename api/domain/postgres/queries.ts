@@ -169,13 +169,16 @@ export const getPostgresFullFoodWithFullNutrients = async (
       bf.*,
       json_agg((
         SELECT x
-        FROM (SELECT fnt.id, fnt.amount, fnt.derivation_id, fnt.nutrient, fnt.food_nutrient_derivation) x
+        FROM (SELECT fnt.id, fnt.amount, fnt.nutrient, fnt.food_nutrient_derivation) x
       )) food_nutrient
     FROM (
       SELECT
         fn.*,
         row_to_json(n) nutrient,
-        row_to_json(fndt) food_nutrient_derivation
+        row_to_json((
+          SELECT x
+          FROM (SELECT fndt.id, fndt.code, fndt.description, fndt.food_nutrient_source) x
+        )) food_nutrient_derivation
       FROM (
         SELECT
           fnd.*,

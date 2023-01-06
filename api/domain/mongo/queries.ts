@@ -260,12 +260,14 @@ export const getMongoFullFoodWithFullNutrients = async (
                     pipeline: [{ $project: { _id: 0 } }]
                   }
                 },
-                { $project: { _id: 0 } }
+                { $unwind: { path: '$food_nutrient_source', preserveNullAndEmptyArrays: true } },
+                { $project: { _id: 0, source_id: 0 } }
               ]
             }
           },
           { $unwind: { path: '$nutrient', preserveNullAndEmptyArrays: true } },
-          { $project: { _id: 0, fdc_id: 0, nutrient_id: 0 } }
+          { $unwind: { path: '$food_nutrient_derivation', preserveNullAndEmptyArrays: true } },
+          { $project: { _id: 0, fdc_id: 0, nutrient_id: 0, derivation_id: 0 } }
         ]
       }
     },
