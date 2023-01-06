@@ -24,3 +24,5 @@ export const getStatsQueryStringParams = (query: ParsedQs) => {
   const dbValueArr = !Array.isArray(dbValue) ? [...dbValue.split(',')] : dbValue;
   return { first: firstValue, last: lastValue, step: stepValue, db: dbValueArr };
 };
+
+export const pageWithSizeToOffset = (page: number, size: number) => (page - 1) * size;

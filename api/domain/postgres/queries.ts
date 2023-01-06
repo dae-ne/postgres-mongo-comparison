@@ -1,3 +1,4 @@
+import { countRows, getData } from './queries.helpers';
 import {
   PostgresCountQueryMethodType,
   PostgresDb,
@@ -5,26 +6,9 @@ import {
 } from '../../types/database';
 import { Quantity } from '../../types/models';
 
-type RowsNumber = Omit<Quantity, 'name'>;
-
 const createWhereFdcIdClause = (id: number | null) => (id ? `WHERE fdc_id = ${id}` : '');
 
 const createWhereIdClause = (id: number | null) => (id ? `WHERE id = ${id}` : '');
-
-const countRows = async (db: PostgresDb, tableName: string): Promise<Quantity> => {
-  const query = `SELECT COUNT(*) FROM ${tableName}`;
-  const { rows } = await db.query<RowsNumber>(query);
-  return {
-    name: tableName,
-    count: +rows[0].count
-  };
-};
-
-const getData = async (db: PostgresDb, query: string, offset: number, limit: number) => {
-  const params = [offset, limit];
-  const { rows } = await db.query(query, params);
-  return rows;
-};
 
 export const countPostgresFood: PostgresCountQueryMethodType = async (
   db: PostgresDb

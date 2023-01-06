@@ -4,5 +4,14 @@
   "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "$(capture).helpers.ts",
+    "*.env": ".env.template",
+    ".prettierrc": ".prettierignore",
+    ".eslintrc.js": ".eslintignore",
+    "docker-compose.yml": ".dockerignore"
   }
 }

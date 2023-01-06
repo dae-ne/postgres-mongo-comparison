@@ -1,11 +1,5 @@
-import express, { NextFunction, Request, Response } from 'express';
-import { handleGetStatsRequest } from './handlers';
-import {
-  MongoCountQueryMethodType,
-  MongoGetQueryMethodType,
-  PostgresCountQueryMethodType,
-  PostgresGetQueryMethodType
-} from '../../types/database';
+import { Router } from 'express';
+import { registerStatsEndpoint } from './routing.helpers';
 import {
   countMongoBrandedFood,
   countMongoFood,
@@ -41,33 +35,10 @@ import {
   countPostgresFoodNutrientSource
 } from '../postgres/queries';
 
-export const router = express.Router();
-
-const registerStatsEndpoint = async (
-  methodName: string,
-  postgresQuery: PostgresGetQueryMethodType,
-  mongoQuery: MongoGetQueryMethodType,
-  postgresCountQuery: PostgresCountQueryMethodType,
-  mongoCountQuery: MongoCountQueryMethodType
-) => {
-  router.get(`/${methodName}`, async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      handleGetStatsRequest(
-        req,
-        res,
-        methodName,
-        postgresQuery,
-        mongoQuery,
-        postgresCountQuery,
-        mongoCountQuery
-      );
-    } catch (error) {
-      next(error);
-    }
-  });
-};
+export const router = Router();
 
 registerStatsEndpoint(
+  router,
   'getFoodStats',
   getPostgresFood,
   getMongoFood,
@@ -76,6 +47,7 @@ registerStatsEndpoint(
 );
 
 registerStatsEndpoint(
+  router,
   'getBrandedFoodStats',
   getPostgresBrandedFood,
   getMongoBrandedFood,
@@ -84,6 +56,7 @@ registerStatsEndpoint(
 );
 
 registerStatsEndpoint(
+  router,
   'getNutrientStats',
   getPostgresNutrient,
   getMongoNutrient,
@@ -92,6 +65,7 @@ registerStatsEndpoint(
 );
 
 registerStatsEndpoint(
+  router,
   'getFoodNutrientStats',
   getPostgresFoodNutrient,
   getMongoFoodNutrient,
@@ -100,6 +74,7 @@ registerStatsEndpoint(
 );
 
 registerStatsEndpoint(
+  router,
   'getFoodNutrientDerivationStats',
   getPostgresFoodNutrientDerivation,
   getMongoFoodNutrientDerivation,
@@ -108,6 +83,7 @@ registerStatsEndpoint(
 );
 
 registerStatsEndpoint(
+  router,
   'getFoodNutrientSourceStats',
   getPostgresFoodNutrientSource,
   getMongoFoodNutrientSource,
@@ -116,6 +92,7 @@ registerStatsEndpoint(
 );
 
 registerStatsEndpoint(
+  router,
   'getFullFoodStats',
   getPostgresFullFood,
   getMongoFullFood,
@@ -124,6 +101,7 @@ registerStatsEndpoint(
 );
 
 registerStatsEndpoint(
+  router,
   'getFullFoodWithNutrientsStats',
   getPostgresFullFoodWithNutrients,
   getMongoFullFoodWithNutrients,
@@ -132,6 +110,7 @@ registerStatsEndpoint(
 );
 
 registerStatsEndpoint(
+  router,
   'getFullFoodWithFullNutrientsStats',
   getPostgresFullFoodWithFullNutrients,
   getMongoFullFoodWithFullNutrients,

@@ -1,36 +1,6 @@
+import { countDocuments, getDataFilteredByFdcId, getDataFilteredById } from './queries.helpers';
 import { MongoCountQueryMethodType, MongoDb, MongoGetQueryMethodType } from '../../types/database';
 import { Quantity } from '../../types/models';
-
-const countDocuments = async (db: MongoDb, collectionName: string): Promise<Quantity> => {
-  const count = await db.collection(collectionName).countDocuments();
-  return { name: collectionName, count };
-};
-
-const getDataFilteredByFdcId = async (
-  db: MongoDb,
-  collectionName: string,
-  skip: number,
-  limit: number,
-  id: number | null = null
-) => {
-  const collection = db.collection(collectionName);
-  return id
-    ? collection.find({ fdc_id: id }).skip(skip).limit(limit).toArray()
-    : collection.find({}).skip(skip).limit(limit).toArray();
-};
-
-const getDataFilteredById = async (
-  db: MongoDb,
-  collectionName: string,
-  skip: number,
-  limit: number,
-  id: number | null = null
-) => {
-  const collection = db.collection(collectionName);
-  return id
-    ? collection.find({ id }).skip(skip).limit(limit).toArray()
-    : collection.find({}).skip(skip).limit(limit).toArray();
-};
 
 export const countMongoFood: MongoCountQueryMethodType = async (db: MongoDb): Promise<Quantity> => {
   const collectionName = 'food';
