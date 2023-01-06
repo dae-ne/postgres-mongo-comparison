@@ -1,4 +1,4 @@
-import { MongoDb } from './db';
+import { MongoCountQueryMethodType, MongoDb, MongoGetQueryMethodType } from '../../types/database';
 import { Quantity } from '../../types/models';
 
 const countDocuments = async (db: MongoDb, collectionName: string): Promise<Quantity> => {
@@ -32,37 +32,47 @@ const getDataFilteredById = async (
     : collection.find({}).skip(skip).limit(limit).toArray();
 };
 
-export const countMongoFood = async (db: MongoDb): Promise<Quantity> => {
+export const countMongoFood: MongoCountQueryMethodType = async (db: MongoDb): Promise<Quantity> => {
   const collectionName = 'food';
   return countDocuments(db, collectionName);
 };
 
-export const countMongoBrandedFood = async (db: MongoDb): Promise<Quantity> => {
+export const countMongoBrandedFood: MongoCountQueryMethodType = async (
+  db: MongoDb
+): Promise<Quantity> => {
   const collectionName = 'branded_food';
   return countDocuments(db, collectionName);
 };
 
-export const countMongoNutrient = async (db: MongoDb): Promise<Quantity> => {
+export const countMongoNutrient: MongoCountQueryMethodType = async (
+  db: MongoDb
+): Promise<Quantity> => {
   const collectionName = 'nutrient';
   return countDocuments(db, collectionName);
 };
 
-export const countMongoFoodNutrient = async (db: MongoDb): Promise<Quantity> => {
+export const countMongoFoodNutrient: MongoCountQueryMethodType = async (
+  db: MongoDb
+): Promise<Quantity> => {
   const collectionName = 'food_nutrient';
   return countDocuments(db, collectionName);
 };
 
-export const countMongoFoodNutrientDerivation = async (db: MongoDb): Promise<Quantity> => {
+export const countMongoFoodNutrientDerivation: MongoCountQueryMethodType = async (
+  db: MongoDb
+): Promise<Quantity> => {
   const collectionName = 'food_nutrient_derivation';
   return countDocuments(db, collectionName);
 };
 
-export const countMongoFoodNutrientSource = async (db: MongoDb): Promise<Quantity> => {
+export const countMongoFoodNutrientSource: MongoCountQueryMethodType = async (
+  db: MongoDb
+): Promise<Quantity> => {
   const collectionName = 'food_nutrient_source';
   return countDocuments(db, collectionName);
 };
 
-export const getMongoFood = async (
+export const getMongoFood: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,
@@ -72,7 +82,7 @@ export const getMongoFood = async (
   return getDataFilteredByFdcId(db, collectionName, skip, limit, id);
 };
 
-export const getMongoBrandedFood = async (
+export const getMongoBrandedFood: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,
@@ -82,7 +92,7 @@ export const getMongoBrandedFood = async (
   return getDataFilteredByFdcId(db, collectionName, skip, limit, id);
 };
 
-export const getMongoNutrient = async (
+export const getMongoNutrient: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,
@@ -92,7 +102,7 @@ export const getMongoNutrient = async (
   return getDataFilteredById(db, collectionName, skip, limit, id);
 };
 
-export const getMongoFoodNutrient = async (
+export const getMongoFoodNutrient: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,
@@ -102,7 +112,7 @@ export const getMongoFoodNutrient = async (
   return getDataFilteredById(db, collectionName, skip, limit, id);
 };
 
-export const getMongoFoodNutrientDerivation = async (
+export const getMongoFoodNutrientDerivation: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,
@@ -112,7 +122,7 @@ export const getMongoFoodNutrientDerivation = async (
   return getDataFilteredById(db, collectionName, skip, limit, id);
 };
 
-export const getMongoFoodNutrientSource = async (
+export const getMongoFoodNutrientSource: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,
@@ -122,7 +132,7 @@ export const getMongoFoodNutrientSource = async (
   return getDataFilteredById(db, collectionName, skip, limit, id);
 };
 
-export const getMongoFullFood = async (
+export const getMongoFullFood: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,
@@ -154,7 +164,7 @@ export const getMongoFullFood = async (
   return db.collection(collectionName).aggregate(aggregatePipeline).toArray();
 };
 
-export const getMongoFullFoodWithNutrients = async (
+export const getMongoFullFoodWithNutrients: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,
@@ -209,7 +219,7 @@ export const getMongoFullFoodWithNutrients = async (
   return db.collection(collectionName).aggregate(aggregatePipeline).toArray();
 };
 
-export const getMongoFullFoodWithFullNutrients = async (
+export const getMongoFullFoodWithFullNutrients: MongoGetQueryMethodType = async (
   db: MongoDb,
   skip: number,
   limit: number,

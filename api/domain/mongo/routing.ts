@@ -1,5 +1,4 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { MongoDb } from './db';
 import {
   handleMongoCountRequest,
   handleMongoGetByIdRequest,
@@ -23,11 +22,11 @@ import {
   getMongoNutrient
 } from './queries';
 import { PaginatedDto } from '../../types/contracts';
-import { Quantity } from '../../types/models';
+import { MongoCountQueryMethodType, MongoGetQueryMethodType } from '../../types/database';
 
 export const router = express.Router();
 
-const registerCountEndpoint = (method: (db: MongoDb) => Promise<Quantity>) => {
+const registerCountEndpoint = (method: MongoCountQueryMethodType) => {
   router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handleMongoCountRequest(req, async (db) => {
@@ -41,14 +40,14 @@ const registerCountEndpoint = (method: (db: MongoDb) => Promise<Quantity>) => {
 };
 
 const registerGetEndpoint = (
-  method: (db: MongoDb, offset: number, limit: number) => Promise<object[]>,
-  countMethod: (db: MongoDb) => Promise<Quantity>
+  method: MongoGetQueryMethodType,
+  countMethod: MongoCountQueryMethodType
 ) => {
   router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handleMongoGetRequest(req, async (db, page, size) => {
         const skip = (page - 1) * size;
-        const data = await method(db, skip, size);
+        const data = await method(db, skip, size, null);
         const { count: total } = await countMethod(db);
 
         const response: PaginatedDto = {
@@ -66,9 +65,7 @@ const registerGetEndpoint = (
   });
 };
 
-const registerGetByIdEndpoint = (
-  method: (db: MongoDb, offset: number, limit: number, id: number) => Promise<object[]>
-) => {
+const registerGetByIdEndpoint = (method: MongoGetQueryMethodType) => {
   router.get(`/${method.name}/:id`, async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handleMongoGetByIdRequest(req, async (db, page, size, id) => {

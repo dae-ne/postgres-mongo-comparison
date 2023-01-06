@@ -1,7 +1,6 @@
-import { Db, MongoClient } from 'mongodb';
-import { mongoConfig } from '../../config/db';
-
-export type MongoDb = Db;
+import { MongoClient } from 'mongodb';
+import { mongoConfig } from '../../config/database';
+import { MongoDb } from '../../types/database';
 
 const { user, password, host, port, database } = mongoConfig;
 

@@ -1,7 +1,11 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { handleGetStatsRequest } from './handlers';
-import { Quantity } from '../../types/models';
-import { MongoDb } from '../mongo/db';
+import {
+  MongoCountQueryMethodType,
+  MongoGetQueryMethodType,
+  PostgresCountQueryMethodType,
+  PostgresGetQueryMethodType
+} from '../../types/database';
 import {
   countMongoBrandedFood,
   countMongoFood,
@@ -19,7 +23,6 @@ import {
   getMongoFullFoodWithNutrients,
   getMongoNutrient
 } from '../mongo/queries';
-import { PostgresDb } from '../postgres/db';
 import {
   countPostgresBrandedFood,
   countPostgresFood,
@@ -42,10 +45,10 @@ export const router = express.Router();
 
 const registerStatsEndpoint = async (
   methodName: string,
-  postgresQuery: (db: PostgresDb, page: number, size: number) => Promise<object[]>,
-  mongoQuery: (db: MongoDb, page: number, size: number) => Promise<object[]>,
-  postgresCountQuery: (db: PostgresDb) => Promise<Quantity>,
-  mongoCountQuery: (db: MongoDb) => Promise<Quantity>
+  postgresQuery: PostgresGetQueryMethodType,
+  mongoQuery: MongoGetQueryMethodType,
+  postgresCountQuery: PostgresCountQueryMethodType,
+  mongoCountQuery: MongoCountQueryMethodType
 ) => {
   router.get(`/${methodName}`, async (req: Request, res: Response, next: NextFunction) => {
     try {

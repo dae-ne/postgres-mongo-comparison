@@ -1,5 +1,4 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { PostgresDb } from './db';
 import {
   handlePostgresCountRequest,
   handlePostgresGetByIdRequest,
@@ -23,11 +22,11 @@ import {
   getPostgresNutrient
 } from './queries';
 import { PaginatedDto } from '../../types/contracts';
-import { Quantity } from '../../types/models';
+import { PostgresCountQueryMethodType, PostgresGetQueryMethodType } from '../../types/database';
 
 export const router = express.Router();
 
-const registerCountEndpoint = (method: (db: PostgresDb) => Promise<Quantity>) => {
+const registerCountEndpoint = (method: PostgresCountQueryMethodType) => {
   router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handlePostgresCountRequest(req, async (db) => {
@@ -41,14 +40,14 @@ const registerCountEndpoint = (method: (db: PostgresDb) => Promise<Quantity>) =>
 };
 
 const registerGetEndpoint = (
-  method: (db: PostgresDb, offset: number, limit: number) => Promise<object[]>,
-  countMethod: (db: PostgresDb) => Promise<Quantity>
+  method: PostgresGetQueryMethodType,
+  countMethod: PostgresCountQueryMethodType
 ) => {
   router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handlePostgresGetRequest(req, async (db, page, size) => {
         const offset = (page - 1) * size;
-        const data = await method(db, offset, size);
+        const data = await method(db, offset, size, null);
         const { count: total } = await countMethod(db);
 
         const response: PaginatedDto = {
@@ -66,9 +65,7 @@ const registerGetEndpoint = (
   });
 };
 
-const registerGetByIdEndpoint = (
-  method: (db: PostgresDb, offset: number, limit: number, id: number) => Promise<object[]>
-) => {
+const registerGetByIdEndpoint = (method: PostgresGetQueryMethodType) => {
   router.get(`/${method.name}/:id`, async (req: Request, res: Response, next: NextFunction) => {
     try {
       await handlePostgresGetByIdRequest(req, async (db, page, size, id) => {

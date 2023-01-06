@@ -1,10 +1,10 @@
 import { Request } from 'express';
-import { MongoDb } from './db';
+import { MongoDb } from '../../types/database';
 import { getPaginationQueryStringParams } from '../../utils/query-strings';
 
 export const handleMongoCountRequest = async (
   req: Request,
-  callback: (mongo: MongoDb) => Promise<void>
+  callback: (db: MongoDb) => Promise<void>
 ) => {
   const { mongoDb } = req.app.locals;
   await callback(mongoDb);
@@ -12,7 +12,7 @@ export const handleMongoCountRequest = async (
 
 export const handleMongoGetRequest = async (
   req: Request,
-  callback: (mongo: MongoDb, page: number, size: number) => Promise<void>
+  callback: (db: MongoDb, page: number, size: number) => Promise<void>
 ) => {
   const { mongoDb } = req.app.locals;
   const { page, size } = getPaginationQueryStringParams(req.query);
@@ -21,7 +21,7 @@ export const handleMongoGetRequest = async (
 
 export const handleMongoGetByIdRequest = async (
   req: Request,
-  callback: (postgres: MongoDb, page: number, size: number, id: number) => Promise<void>
+  callback: (db: MongoDb, page: number, size: number, id: number) => Promise<void>
 ) => {
   const { id } = req.params;
   const { mongoDb } = req.app.locals;

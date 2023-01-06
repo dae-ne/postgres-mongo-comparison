@@ -1,17 +1,23 @@
 import { Request, Response } from 'express';
 import { MONGO_NAME, POSTGRES_NAME } from '../../config/constants';
 import { StatsDatasetDto, StatsDto } from '../../types/contracts';
-import { Quantity } from '../../types/models';
+import {
+  MongoCountQueryMethodType,
+  MongoDb,
+  MongoGetQueryMethodType,
+  PostgresCountQueryMethodType,
+  PostgresDb,
+  PostgresGetQueryMethodType
+} from '../../types/database';
 import { logger } from '../../utils/logging';
 import { getStatsQueryStringParams } from '../../utils/query-strings';
-import { MongoDb } from '../mongo/db';
-import { PostgresDb } from '../postgres/db';
 
-const handleSingleDatabase = async <TDb>(
-  db: TDb,
+// TODO: fix types in parameters
+const handleSingleDatabase = async (
+  db: PostgresDb & MongoDb,
   dbName: string,
-  query: (db: TDb, page: number, size: number) => Promise<object[]>,
-  countQuery: (db: TDb) => Promise<Quantity>,
+  query: PostgresGetQueryMethodType | MongoGetQueryMethodType,
+  countQuery: PostgresCountQueryMethodType | MongoCountQueryMethodType,
   first: number,
   last: number,
   step: number
@@ -23,7 +29,7 @@ const handleSingleDatabase = async <TDb>(
   for (let i = first; i <= rangeTo; i += step) {
     const start = Date.now();
     // eslint-disable-next-line no-await-in-loop
-    await query(db, 1, i);
+    await query(db, 0, i, null);
     const elapsed = Date.now() - start;
     executionTimes.push(elapsed);
     logger.stats(
@@ -43,10 +49,10 @@ export const handleGetStatsRequest = async (
   req: Request,
   res: Response,
   methodName: string,
-  postgresQuery: (db: PostgresDb, page: number, size: number) => Promise<object[]>,
-  mongoQuery: (db: MongoDb, page: number, size: number) => Promise<object[]>,
-  postgresCountQuery: (db: PostgresDb) => Promise<Quantity>,
-  mongoCountQuery: (db: MongoDb) => Promise<Quantity>
+  postgresQuery: PostgresGetQueryMethodType,
+  mongoQuery: MongoGetQueryMethodType,
+  postgresCountQuery: PostgresCountQueryMethodType,
+  mongoCountQuery: MongoCountQueryMethodType
 ) => {
   const { postgresDb, mongoDb } = req.app.locals;
   const { first, last, step, db } = getStatsQueryStringParams(req.query);

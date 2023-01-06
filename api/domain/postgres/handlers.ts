@@ -1,10 +1,10 @@
 import { Request } from 'express';
-import { PostgresDb } from './db';
+import { PostgresDb } from '../../types/database';
 import { getPaginationQueryStringParams } from '../../utils/query-strings';
 
 export const handlePostgresCountRequest = async (
   req: Request,
-  callback: (postgres: PostgresDb) => Promise<void>
+  callback: (db: PostgresDb) => Promise<void>
 ) => {
   const { postgresDb } = req.app.locals;
   await callback(postgresDb);
@@ -12,7 +12,7 @@ export const handlePostgresCountRequest = async (
 
 export const handlePostgresGetRequest = async (
   req: Request,
-  callback: (postgres: PostgresDb, page: number, size: number) => Promise<void>
+  callback: (db: PostgresDb, page: number, size: number) => Promise<void>
 ) => {
   const { postgresDb } = req.app.locals;
   const { page, size } = getPaginationQueryStringParams(req.query);
@@ -21,7 +21,7 @@ export const handlePostgresGetRequest = async (
 
 export const handlePostgresGetByIdRequest = async (
   req: Request,
-  callback: (postgres: PostgresDb, page: number, size: number, id: number) => Promise<void>
+  callback: (db: PostgresDb, page: number, size: number, id: number) => Promise<void>
 ) => {
   const { id } = req.params;
   const { postgresDb } = req.app.locals;

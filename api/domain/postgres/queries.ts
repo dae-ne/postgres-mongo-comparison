@@ -1,4 +1,8 @@
-import { PostgresDb } from './db';
+import {
+  PostgresCountQueryMethodType,
+  PostgresDb,
+  PostgresGetQueryMethodType
+} from '../../types/database';
 import { Quantity } from '../../types/models';
 
 type RowsNumber = Omit<Quantity, 'name'>;
@@ -22,37 +26,49 @@ const getData = async (db: PostgresDb, query: string, offset: number, limit: num
   return rows;
 };
 
-export const countPostgresFood = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresFood: PostgresCountQueryMethodType = async (
+  db: PostgresDb
+): Promise<Quantity> => {
   const tableName = 'food';
   return countRows(db, tableName);
 };
 
-export const countPostgresBrandedFood = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresBrandedFood: PostgresCountQueryMethodType = async (
+  db: PostgresDb
+): Promise<Quantity> => {
   const tableName = 'branded_food';
   return countRows(db, tableName);
 };
 
-export const countPostgresNutrient = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresNutrient: PostgresCountQueryMethodType = async (
+  db: PostgresDb
+): Promise<Quantity> => {
   const tableName = 'nutrient';
   return countRows(db, tableName);
 };
 
-export const countPostgresFoodNutrient = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresFoodNutrient: PostgresCountQueryMethodType = async (
+  db: PostgresDb
+): Promise<Quantity> => {
   const tableName = 'food_nutrient';
   return countRows(db, tableName);
 };
 
-export const countPostgresFoodNutrientDerivation = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresFoodNutrientDerivation: PostgresCountQueryMethodType = async (
+  db: PostgresDb
+): Promise<Quantity> => {
   const tableName = 'food_nutrient_derivation';
   return countRows(db, tableName);
 };
 
-export const countPostgresFoodNutrientSource = async (db: PostgresDb): Promise<Quantity> => {
+export const countPostgresFoodNutrientSource: PostgresCountQueryMethodType = async (
+  db: PostgresDb
+): Promise<Quantity> => {
   const tableName = 'food_nutrient_source';
   return countRows(db, tableName);
 };
 
-export const getPostgresFood = async (
+export const getPostgresFood: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
@@ -62,7 +78,7 @@ export const getPostgresFood = async (
   return getData(db, query, offset, limit);
 };
 
-export const getPostgresBrandedFood = async (
+export const getPostgresBrandedFood: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
@@ -72,7 +88,7 @@ export const getPostgresBrandedFood = async (
   return getData(db, query, offset, limit);
 };
 
-export const getPostgresNutrient = async (
+export const getPostgresNutrient: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
@@ -82,7 +98,7 @@ export const getPostgresNutrient = async (
   return getData(db, query, offset, limit);
 };
 
-export const getPostgresFoodNutrient = async (
+export const getPostgresFoodNutrient: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
@@ -92,7 +108,7 @@ export const getPostgresFoodNutrient = async (
   return getData(db, query, offset, limit);
 };
 
-export const getPostgresFoodNutrientDerivation = async (
+export const getPostgresFoodNutrientDerivation: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
@@ -104,7 +120,7 @@ export const getPostgresFoodNutrientDerivation = async (
   return getData(db, query, offset, limit);
 };
 
-export const getPostgresFoodNutrientSource = async (
+export const getPostgresFoodNutrientSource: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
@@ -114,7 +130,7 @@ export const getPostgresFoodNutrientSource = async (
   return getData(db, query, offset, limit);
 };
 
-export const getPostgresFullFood = async (
+export const getPostgresFullFood: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
@@ -126,7 +142,7 @@ export const getPostgresFullFood = async (
   return getData(db, query, offset, limit);
 };
 
-export const getPostgresFullFoodWithNutrients = async (
+export const getPostgresFullFoodWithNutrients: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
@@ -156,8 +172,7 @@ export const getPostgresFullFoodWithNutrients = async (
   return getData(db, query, offset, limit);
 };
 
-// TODO: improve query
-export const getPostgresFullFoodWithFullNutrients = async (
+export const getPostgresFullFoodWithFullNutrients: PostgresGetQueryMethodType = async (
   db: PostgresDb,
   offset: number,
   limit: number,
