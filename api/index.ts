@@ -39,7 +39,7 @@ const setUpRoutes = (app: Express) => {
   // });
 
   app.get('*', (_, res) => {
-    res.status(404).send({ message: '404 - not found' });
+    res.status(404).json({ message: '404 - not found' });
   });
 };
 
