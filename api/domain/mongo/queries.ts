@@ -11,7 +11,7 @@ const getDataFilteredByFdcId = async (
   collectionName: string,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collection = db.collection(collectionName);
   return id
@@ -24,7 +24,7 @@ const getDataFilteredById = async (
   collectionName: string,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collection = db.collection(collectionName);
   return id
@@ -66,7 +66,7 @@ export const getMongoFood = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'food';
   return getDataFilteredByFdcId(db, collectionName, skip, limit, id);
@@ -76,7 +76,7 @@ export const getMongoBrandedFood = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'branded_food';
   return getDataFilteredByFdcId(db, collectionName, skip, limit, id);
@@ -86,7 +86,7 @@ export const getMongoNutrient = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'nutrient';
   return getDataFilteredById(db, collectionName, skip, limit, id);
@@ -96,7 +96,7 @@ export const getMongoFoodNutrient = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'food_nutrient';
   return getDataFilteredById(db, collectionName, skip, limit, id);
@@ -106,7 +106,7 @@ export const getMongoFoodNutrientDerivation = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'food_nutrient_derivation';
   return getDataFilteredById(db, collectionName, skip, limit, id);
@@ -116,7 +116,7 @@ export const getMongoFoodNutrientSource = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'food_nutrient_source';
   return getDataFilteredById(db, collectionName, skip, limit, id);
@@ -126,7 +126,7 @@ export const getMongoFullFood = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'food';
 
@@ -158,7 +158,7 @@ export const getMongoFullFoodWithNutrients = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'food';
 
@@ -213,7 +213,7 @@ export const getMongoFullFoodWithFullNutrients = async (
   db: MongoDb,
   skip: number,
   limit: number,
-  id: number | undefined = undefined
+  id: number | null = null
 ) => {
   const collectionName = 'food';
 
