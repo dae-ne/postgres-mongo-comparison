@@ -1,7 +1,4 @@
 import { Request, Response } from 'express';
-import { StatsDatasetDto } from '../../contracts/StatsDatasetDto';
-import { StatsDto } from '../../contracts/StatsDto';
-import { Quantity } from '../../models/Quantity';
 import { logger } from '../../utils/logging';
 import { getStatsQueryStringParams, MONGO_NAME, POSTGRES_NAME } from '../../utils/query-strings';
 import { MongoDb } from '../mongo/db';

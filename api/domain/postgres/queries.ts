@@ -1,5 +1,4 @@
 import { PostgresDb } from './db';
-import { Quantity } from '../../models/Quantity';
 
 type RowsNumber = Omit<Quantity, 'name'>;
 

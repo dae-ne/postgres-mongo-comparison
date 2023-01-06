@@ -22,8 +22,6 @@ import {
   getPostgresFullFoodWithNutrients,
   getPostgresNutrient
 } from './queries';
-import { PaginatedDto } from '../../contracts/PaginatedDto';
-import { Quantity } from '../../models/Quantity';
 
 export const router = express.Router();
 

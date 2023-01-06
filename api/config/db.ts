@@ -1,10 +1,10 @@
-export type DbConfig = {
+interface DbConfig {
   user: string;
   password: string;
   database: string;
   host: string;
   port: number;
-};
+}
 
 const defaultHost = 'localhost';
 
