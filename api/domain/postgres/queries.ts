@@ -1,14 +1,10 @@
-import { countRows, getData } from './queries.helpers';
+import { countRows, createWhereIdClause, getData } from './queries.helpers';
 import {
   PostgresCountQueryMethodType,
   PostgresDb,
   PostgresGetQueryMethodType
 } from '../../types/database';
 import { Quantity } from '../../types/models';
-
-const createWhereFdcIdClause = (id: number | null) => (id ? `WHERE fdc_id = ${id}` : '');
-
-const createWhereIdClause = (id: number | null) => (id ? `WHERE id = ${id}` : '');
 
 export const countPostgresFood: PostgresCountQueryMethodType = async (
   db: PostgresDb
@@ -58,7 +54,7 @@ export const getPostgresFood: PostgresGetQueryMethodType = async (
   limit: number,
   id: number | null = null
 ) => {
-  const query = `SELECT * FROM food ${createWhereFdcIdClause(id)} OFFSET $1 LIMIT $2`;
+  const query = `SELECT * FROM food ${createWhereIdClause(id, 'fdc_id')} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
 
@@ -68,7 +64,10 @@ export const getPostgresBrandedFood: PostgresGetQueryMethodType = async (
   limit: number,
   id: number | null = null
 ) => {
-  const query = `SELECT * FROM branded_food ${createWhereFdcIdClause(id)} OFFSET $1 LIMIT $2`;
+  const query = `SELECT * FROM branded_food ${createWhereIdClause(
+    id,
+    'fdc_id'
+  )} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
 
@@ -78,7 +77,7 @@ export const getPostgresNutrient: PostgresGetQueryMethodType = async (
   limit: number,
   id: number | null = null
 ) => {
-  const query = `SELECT * FROM nutrient ${createWhereIdClause(id)} OFFSET $1 LIMIT $2`;
+  const query = `SELECT * FROM nutrient ${createWhereIdClause(id, 'id')} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
 
@@ -88,7 +87,7 @@ export const getPostgresFoodNutrient: PostgresGetQueryMethodType = async (
   limit: number,
   id: number | null = null
 ) => {
-  const query = `SELECT * FROM food_nutrient ${createWhereIdClause(id)} OFFSET $1 LIMIT $2`;
+  const query = `SELECT * FROM food_nutrient ${createWhereIdClause(id, 'id')} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
 
@@ -99,7 +98,8 @@ export const getPostgresFoodNutrientDerivation: PostgresGetQueryMethodType = asy
   id: number | null = null
 ) => {
   const query = `SELECT * FROM food_nutrient_derivation ${createWhereIdClause(
-    id
+    id,
+    'id'
   )} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
@@ -110,7 +110,10 @@ export const getPostgresFoodNutrientSource: PostgresGetQueryMethodType = async (
   limit: number,
   id: number | null = null
 ) => {
-  const query = `SELECT * FROM food_nutrient_source ${createWhereIdClause(id)} OFFSET $1 LIMIT $2`;
+  const query = `SELECT * FROM food_nutrient_source ${createWhereIdClause(
+    id,
+    'id'
+  )} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
 
@@ -120,8 +123,9 @@ export const getPostgresFullFood: PostgresGetQueryMethodType = async (
   limit: number,
   id: number | null = null
 ) => {
-  const query = `SELECT * FROM food JOIN branded_food USING (fdc_id) ${createWhereFdcIdClause(
-    id
+  const query = `SELECT * FROM food JOIN branded_food USING (fdc_id) ${createWhereIdClause(
+    id,
+    'fdc_id'
   )} OFFSET $1 LIMIT $2`;
   return getData(db, query, offset, limit);
 };
@@ -149,7 +153,7 @@ export const getPostgresFullFoodWithNutrients: PostgresGetQueryMethodType = asyn
     ) fnt
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
-    ${createWhereFdcIdClause(id)}
+    ${createWhereIdClause(id, 'fdc_id')}
     GROUP BY f.fdc_id, bf.fdc_id
     OFFSET $1
     LIMIT $2;`;
@@ -190,7 +194,7 @@ export const getPostgresFullFoodWithFullNutrients: PostgresGetQueryMethodType = 
     ) fnt
     RIGHT JOIN food f USING (fdc_id)
     LEFT JOIN branded_food bf USING (fdc_id)
-    ${createWhereFdcIdClause(id)}
+    ${createWhereIdClause(id, 'fdc_id')}
     GROUP BY f.fdc_id, bf.fdc_id
     OFFSET $1
     LIMIT $2;`;

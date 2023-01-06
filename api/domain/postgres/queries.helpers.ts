@@ -3,6 +3,9 @@ import { Quantity } from '../../types/models';
 
 type RowsNumber = Omit<Quantity, 'name'>;
 
+export const createWhereIdClause = (id: number | null, fieldName: string) =>
+  id ? `WHERE ${fieldName} = ${id}` : '';
+
 export const countRows = async (db: PostgresDb, tableName: string): Promise<Quantity> => {
   const query = `SELECT COUNT(*) FROM ${tableName}`;
   const { rows } = await db.query<RowsNumber>(query);
