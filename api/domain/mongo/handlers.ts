@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { MongoDb } from './db';
-import { getPaginationParams } from '../../utils/query';
+import { getPaginationQueryStringParams } from '../../utils/query-strings';
 
 export const handleMongoCountRequest = async (
   req: Request,
@@ -15,7 +15,7 @@ export const handleMongoGetRequest = async (
   callback: (mongo: MongoDb, page: number, size: number) => Promise<void>
 ) => {
   const { mongoDb } = req.app.locals;
-  const { page, size } = getPaginationParams(req.query);
+  const { page, size } = getPaginationQueryStringParams(req.query);
   await callback(mongoDb, page, size);
 };
 

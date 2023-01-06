@@ -1,5 +1,5 @@
 import { MongoDb } from './db';
-import { Quantity } from '../models/Quantity';
+import { Quantity } from '../../models/Quantity';
 
 const countDocuments = async (db: MongoDb, collectionName: string): Promise<Quantity> => {
   const count = await db.collection(collectionName).countDocuments();
@@ -131,6 +131,8 @@ export const getMongoFullFood = async (
   const collectionName = 'food';
 
   let aggregatePipeline: object[] = [
+    { $skip: skip },
+    { $limit: limit },
     {
       $lookup: {
         from: 'branded_food',
@@ -149,8 +151,7 @@ export const getMongoFullFood = async (
     aggregatePipeline = [{ $match: { fdc_id: id } }, ...aggregatePipeline];
   }
 
-  const cursor = db.collection(collectionName).aggregate(aggregatePipeline).skip(skip).limit(limit);
-  return cursor.toArray();
+  return db.collection(collectionName).aggregate(aggregatePipeline).toArray();
 };
 
 export const getMongoFullFoodWithNutrients = async (
@@ -162,6 +163,8 @@ export const getMongoFullFoodWithNutrients = async (
   const collectionName = 'food';
 
   let aggregatePipeline: object[] = [
+    { $skip: skip },
+    { $limit: limit },
     {
       $lookup: {
         from: 'branded_food',
@@ -203,8 +206,7 @@ export const getMongoFullFoodWithNutrients = async (
     aggregatePipeline = [{ $match: { fdc_id: id } }, ...aggregatePipeline];
   }
 
-  const cursor = db.collection(collectionName).aggregate(aggregatePipeline).skip(skip).limit(limit);
-  return cursor.toArray();
+  return db.collection(collectionName).aggregate(aggregatePipeline).toArray();
 };
 
 export const getMongoFullFoodWithFullNutrients = async (
@@ -216,6 +218,8 @@ export const getMongoFullFoodWithFullNutrients = async (
   const collectionName = 'food';
 
   let aggregatePipeline: object[] = [
+    { $skip: skip },
+    { $limit: limit },
     {
       $lookup: {
         from: 'branded_food',
@@ -277,6 +281,5 @@ export const getMongoFullFoodWithFullNutrients = async (
     aggregatePipeline = [{ $match: { fdc_id: id } }, ...aggregatePipeline];
   }
 
-  const cursor = db.collection(collectionName).aggregate(aggregatePipeline).skip(skip).limit(limit);
-  return cursor.toArray();
+  return db.collection(collectionName).aggregate(aggregatePipeline).toArray();
 };

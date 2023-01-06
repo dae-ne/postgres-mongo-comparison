@@ -1,4 +1,4 @@
-export interface PaginatedResponse {
+export interface PaginatedDto {
   count: number;
   page: number;
   total: number;

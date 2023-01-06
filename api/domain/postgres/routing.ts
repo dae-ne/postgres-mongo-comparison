@@ -22,8 +22,8 @@ import {
   getPostgresFullFoodWithNutrients,
   getPostgresNutrient
 } from './queries';
-import { PaginatedResponse } from '../../contracts/PaginatedResponse';
-import { Quantity } from '../models/Quantity';
+import { PaginatedDto } from '../../contracts/PaginatedDto';
+import { Quantity } from '../../models/Quantity';
 
 export const router = express.Router();
 
@@ -51,7 +51,7 @@ const registerGetEndpoint = (
         const data = await method(db, offset, size);
         const { count: total } = await countMethod(db);
 
-        const response: PaginatedResponse = {
+        const response: PaginatedDto = {
           count: data.length,
           page,
           total,
