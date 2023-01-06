@@ -1,4 +1,5 @@
 import { ParsedQs } from 'qs';
+import { MONGO_NAME, POSTGRES_NAME } from '../config/constants';
 
 const DEFAULT_PAGE_NO = 1;
 const DEFAULT_PAGE_SIZE = 50;
@@ -6,9 +7,6 @@ const DEFAULT_PAGE_SIZE = 50;
 const DEFAULT_STATS_FIRST_VALUE = 1;
 const DEFAULT_STATS_LAST_VALUE = 10;
 const DEFAULT_STATS_STEP_VALUE = 1;
-
-export const POSTGRES_NAME = 'PostgreSQL';
-export const MONGO_NAME = 'MongoDB';
 
 export const getPaginationQueryStringParams = (query: ParsedQs) => {
   const { page, size } = query;

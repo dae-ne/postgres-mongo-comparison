@@ -1,4 +1,5 @@
 import { MongoDb } from './db';
+import { Quantity } from '../../types/models';
 
 const countDocuments = async (db: MongoDb, collectionName: string): Promise<Quantity> => {
   const count = await db.collection(collectionName).countDocuments();

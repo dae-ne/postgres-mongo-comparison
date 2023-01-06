@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { handleGetStatsRequest } from './handlers';
+import { Quantity } from '../../types/models';
 import { MongoDb } from '../mongo/db';
 import {
   countMongoBrandedFood,
