@@ -13,13 +13,11 @@ const handle404 = (_: Request, res: Response) =>
   res.status(404).json({ message: '404 - not found' });
 
 const handleConnectRequest = async (_: Request, res: Response) => {
+  reconnectionRequests++;
+
+  logger.info(`db connection request: ${reconnectionRequests} (min: ${MIN_RECONNECTION_REQUESTS})`);
+
   if (reconnectionRequests < MIN_RECONNECTION_REQUESTS) {
-    reconnectionRequests++;
-
-    logger.info(
-      `db connection request: ${reconnectionRequests} (min: ${MIN_RECONNECTION_REQUESTS})`
-    );
-
     res.status(200).json({
       message: 'minimal requests number requirement not satisfied',
       request_number: reconnectionRequests,
