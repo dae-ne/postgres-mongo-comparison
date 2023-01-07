@@ -1,10 +1,22 @@
-FROM node:18.12.1-alpine
+FROM node:18-alpine
+
+ARG USERNAME
+ARG PASSWORD
+
+ENV APP_PORT 8000
+ENV DB_USER $USERNAME
+ENV DB_PASSWORD $PASSWORD
+ENV DB_NAME fdc
+ENV DB_POSTGRES_HOST postgres
+ENV DB_POSTGRES_PORT 5432
+ENV DB_MONGO_HOST mongodb
+ENV DB_MONGO_PORT 27017
 
 WORKDIR /usr/src/app
 
-COPY * .
+COPY . .
 
-RUN npm install
+RUN npm install --ignore-scripts
 RUN npm run build
 
 EXPOSE 8000

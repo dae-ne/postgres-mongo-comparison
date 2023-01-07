@@ -1,6 +1,19 @@
 version: "3.8"
 
 services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      args:
+        USERNAME: $DB_USERNAME
+        PASSWORD: $DB_PASSWORD
+    depends_on:
+      - mongodb
+      - postgres
+    ports:
+      - 8000:8000
+
   mongodb:
     build:
       context: ./db

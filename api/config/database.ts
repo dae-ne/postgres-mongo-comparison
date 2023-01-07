@@ -11,7 +11,7 @@ const defaultHost = 'localhost';
 const sharedConfig = {
   user: process.env.DB_USER ?? 'user',
   password: process.env.DB_PASSWORD ?? 'password',
-  database: process.env.PORT_NAME ?? 'fdc'
+  database: process.env.DB_NAME ?? 'fdc'
 };
 
 export const postgresConfig: DbConfig = {

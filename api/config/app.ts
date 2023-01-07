@@ -3,5 +3,5 @@ interface AppConfig {
 }
 
 export const appConfig: AppConfig = {
-  port: +(process.env.PORT ?? 8000)
+  port: +(process.env.APP_PORT ?? 3000)
 };

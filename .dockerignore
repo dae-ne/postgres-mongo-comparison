@@ -1,2 +1,9 @@
 **/node_modules/
 **/build/
+**/.husky/
+**/.eslint*
+**/.prettier*
+**/Dockerfile
+**/package-lock.json
+**/yarn*
+**/pnpm*

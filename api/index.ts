@@ -1,50 +1,17 @@
 import { config } from 'dotenv';
-import express, { Express } from 'express';
+import express from 'express';
 import { exit } from 'process';
 import { appConfig } from './config/app';
 import { closeMongoDbConnection, connectToMongoDb } from './domain/mongo/database';
-import { router as mongoRouter } from './domain/mongo/routing';
 import { connectToPostgresDb } from './domain/postgres/database';
-import { router as postgresRouter } from './domain/postgres/routing';
-import { router as statsRouter } from './domain/stats/routing.js';
+import { handleEvents, setUpRoutes } from './index.helpers';
 import { errorHandlerMiddleware, loggerMiddleware } from './infrastructure/middlewares';
 import { MongoDb, PostgresDb } from './types/database';
 import { logger } from './utils/logging';
 
 config();
 
-type EventCallbackType = (() => Promise<void>) | ((error: Error) => Promise<void>);
-
-const handleEvents = (callback: EventCallbackType, ...events: string[]) => {
-  events.forEach((e) => {
-    process.on(e, callback);
-  });
-};
-
-const setUpRoutes = (app: Express) => {
-  app.get('/_health', (_, res) => {
-    res.send('ok');
-  });
-
-  app.use('/', postgresRouter);
-  app.use('/', mongoRouter);
-  app.use('/', statsRouter);
-
-  // app.get('/', (_, res) => {
-  //   let endpoints: string[] = [];
-  //   const routers = [statsRouter, postgresRouter, mongoRouter];
-  //   routers.forEach((router) => {
-  //     endpoints = [...endpoints, ...router.stack.map((r) => r.route.path)];
-  //   });
-  //   res.send(endpoints);
-  // });
-
-  app.get('*', (_, res) => {
-    res.status(404).json({ message: '404 - not found' });
-  });
-};
-
-const main = async () => {
+async function main() {
   const app = express();
   const { port } = appConfig;
 
@@ -95,6 +62,6 @@ const main = async () => {
   app.listen(port, () => {
     logger.info('⚡️ Server is running ⚡️', `http://localhost:${port}`);
   });
-};
+}
 
 main();
