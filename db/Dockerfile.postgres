@@ -6,6 +6,8 @@ ARG PASSWORD
 ENV POSTGRES_USER $USERNAME
 ENV POSTGRES_PASSWORD $PASSWORD
 
+RUN apt-get update && apt-get install -y curl
+
 WORKDIR /seed
 
 COPY ./seed/*.csv .

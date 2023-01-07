@@ -15,6 +15,7 @@ module.exports = {
   ],
   rules: {
     'no-await-in-loop': 'warn',
+    'no-plusplus': 'off',
     'no-unused-vars': 'off',
     'import/prefer-default-export': 'off',
     'import/order': [

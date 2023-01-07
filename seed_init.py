@@ -33,17 +33,17 @@ def print_info(xd: str, text: str, color: Colors):
     print(f'{color}{xd}{Colors.ENDC}', text)
 
 
-# def all_files_already_exist(files: List[str]) -> bool:
-#     all_exist = True
+def all_files_already_exist(files: List[str]) -> bool:
+    all_exist = True
 
-#     for file in files:
-#         file_path = f'{BASE_PATH}{file}'
-#         q = Path(file_path)
+    for file in files:
+        file_path = f'{BASE_PATH}{file}'
+        q = Path(file_path)
 
-#         if not q.exists():
-#             all_exist = False
+        if not q.exists():
+            all_exist = False
 
-#     return all_exist
+    return all_exist
 
 
 def download_fdc_files(files: List[str]):

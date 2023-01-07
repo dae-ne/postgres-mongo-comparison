@@ -6,6 +6,8 @@ ARG PASSWORD
 ENV MONGO_INITDB_ROOT_USERNAME $USERNAME
 ENV MONGO_INITDB_ROOT_PASSWORD $PASSWORD
 
+RUN apt-get update && apt-get install -y curl
+
 WORKDIR /seed
 
 COPY ./seed/*.csv .

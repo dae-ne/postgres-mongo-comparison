@@ -48,6 +48,12 @@ docker-compose up
 - **password:** password _(default)_
 - **port:** 5432
 
+## API
+
+- **protocol:** http
+- **host:** localhost
+- **port:** 8000
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

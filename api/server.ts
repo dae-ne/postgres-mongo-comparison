@@ -1,5 +1,7 @@
 import { config } from 'dotenv';
 import { appConfig } from './config/app';
+import { errorHandlerMiddleware, loggerMiddleware } from './infrastructure/middlewares';
+import { logger } from './library/logging';
 import {
   cleanup,
   connectToDatabases,
@@ -7,9 +9,7 @@ import {
   handleEvents,
   handleUncaughtException,
   setUpRoutes
-} from './index.helpers';
-import { errorHandlerMiddleware, loggerMiddleware } from './infrastructure/middlewares';
-import { logger } from './library/logging';
+} from './server.setup';
 
 async function main() {
   const app = getApp();
@@ -20,7 +20,7 @@ async function main() {
   handleEvents(cleanup, 'exit', 'beforeExit', 'SIGINT', 'SIGUSR1', 'SIGUSR2');
   handleEvents(handleUncaughtException, 'uncaughtException');
 
-  await connectToDatabases();
+  await connectToDatabases('api');
 
   app.use(loggerMiddleware);
   setUpRoutes();
