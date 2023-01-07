@@ -18,7 +18,7 @@ const formatDate = (date: Date) =>
 
 const getMessageWithDateTime = (...message: (string | number)[]) => {
   const date = new Date();
-  const formattedDate = `[${formatDate(date)}]`.padEnd(DATE_TIME_PAD_LENGTH);
+  const formattedDate = `[${formatDate(date)} UTC]`.padEnd(DATE_TIME_PAD_LENGTH);
   return `${formattedDate} ${message.join(' ')}`;
 };
 
