@@ -9,9 +9,9 @@ interface DbConfig {
 const defaultHost = 'localhost';
 
 const sharedConfig = {
-  user: process.env.DB_USER ?? 'user',
-  password: process.env.DB_PASSWORD ?? 'password',
-  database: process.env.DB_NAME ?? 'fdc'
+  user: process.env.DB_USER ?? '',
+  password: process.env.DB_PASSWORD ?? '',
+  database: process.env.DB_NAME ?? ''
 };
 
 export const postgresConfig: DbConfig = {

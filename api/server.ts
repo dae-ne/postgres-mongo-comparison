@@ -1,4 +1,9 @@
+/* eslint-disable import/first */
+// eslint-disable-next-line import/order
 import { config as configEnvVariables } from 'dotenv';
+
+configEnvVariables();
+
 import { appConfig } from './config/app';
 import { errorHandlerMiddleware, loggerMiddleware } from './infrastructure/middlewares';
 import { logger } from './library/logging';
@@ -14,8 +19,6 @@ import {
 async function main() {
   const app = createExpressApp();
   const { port } = appConfig;
-
-  configEnvVariables();
 
   handleEvents(cleanup, 'exit', 'beforeExit', 'SIGINT', 'SIGUSR1', 'SIGUSR2');
   handleEvents(handleUncaughtException, 'uncaughtException');
