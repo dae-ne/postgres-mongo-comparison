@@ -70,7 +70,7 @@ export const connectToDatabases = async (reconnection: DatabaseReconnectionType,
   }
 };
 
-export const setUpRoutes = () => {
+export const setUpRouting = () => {
   app.get('/_connect', async (_, res) => {
     reconnectionRequests++;
     logger.info(
@@ -83,17 +83,19 @@ export const setUpRoutes = () => {
         request_number: reconnectionRequests,
         min_requests: MIN_RECONNECTION_REQUESTS
       });
+      return;
     }
 
-    const success = await connectToDatabases('api');
+    const success = await connectToDatabases('retries');
 
     if (success) {
       logger.info(`connected to databases`);
       res.status(200).json({ message: 'connected' });
-    } else {
-      logger.error('error while connecting to databases');
-      res.status(500).json({ message: 'problem with db connection' });
+      return;
     }
+
+    logger.error('error while connecting to databases');
+    res.status(500).json({ message: 'problem with db connection' });
   });
 
   app.use('/', postgresRouter);

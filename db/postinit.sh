@@ -1,4 +1,7 @@
 #!/bin/bash
 
+HOST=$API_HOST
+PORT=$API_PORT
+
 rm /seed/*.csv
-curl http://api:8000/_connect
+curl -s http://$HOST:$PORT/_connect

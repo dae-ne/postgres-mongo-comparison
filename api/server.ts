@@ -8,8 +8,8 @@ import {
   getApp,
   handleEvents,
   handleUncaughtException,
-  setUpRoutes
-} from './server.setup';
+  setUpRouting
+} from './server.helpers';
 
 async function main() {
   const app = getApp();
@@ -23,7 +23,7 @@ async function main() {
   await connectToDatabases('api');
 
   app.use(loggerMiddleware);
-  setUpRoutes();
+  setUpRouting();
   app.use(errorHandlerMiddleware);
 
   app.listen(port, () => {
