@@ -4,9 +4,9 @@ import {
   handlePostgresGetByIdRequest,
   handlePostgresGetRequest
 } from './handlers';
+import { pageWithSizeToOffset } from '../../library/query-strings';
 import { PaginatedDto } from '../../types/contracts';
 import { PostgresCountQueryMethodType, PostgresGetQueryMethodType } from '../../types/database';
-import { pageWithSizeToOffset } from '../../utils/query-strings';
 
 export const registerCountEndpoint = (router: Router, method: PostgresCountQueryMethodType) => {
   router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {

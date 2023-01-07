@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { MONGO_NAME, POSTGRES_NAME } from '../../config/constants';
+import { logger } from '../../library/logging';
+import { getStatsQueryStringParams } from '../../library/query-strings';
 import { StatsDatasetDto, StatsDto } from '../../types/contracts';
 import {
   MongoCountQueryMethodType,
@@ -9,8 +11,6 @@ import {
   PostgresDb,
   PostgresGetQueryMethodType
 } from '../../types/database';
-import { logger } from '../../utils/logging';
-import { getStatsQueryStringParams } from '../../utils/query-strings';
 
 // TODO: fix types in parameters
 const handleSingleDatabase = async (

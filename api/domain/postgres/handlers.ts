@@ -1,6 +1,6 @@
 import { Request } from 'express';
+import { getPaginationQueryStringParams } from '../../library/query-strings';
 import { PostgresDb } from '../../types/database';
-import { getPaginationQueryStringParams } from '../../utils/query-strings';
 
 export const handlePostgresCountRequest = async (
   req: Request,

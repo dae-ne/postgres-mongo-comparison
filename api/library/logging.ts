@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const COLOR_RESET = '\x1b[0m';
 const COLOR_GREEN = '\x1b[32m';
+const COLOR_YELLOW = '\x1b[33m';
 const COLOR_RED = '\x1b[31m';
 const COLOR_LIGHT_BLUE = '\x1b[94m';
 
@@ -27,6 +28,12 @@ const logInfo = (...message: (string | number)[]) =>
     getMessageWithDateTime(...message)
   );
 
+const logWarning = (...message: (string | number)[]) =>
+  console.log(
+    `${COLOR_YELLOW}[WARNING]${COLOR_RESET}`.padEnd(PREFIX_PAD_LENGTH),
+    getMessageWithDateTime(...message)
+  );
+
 const logError = (...message: (string | number)[]) =>
   console.log(
     `${COLOR_RED}[ERROR]${COLOR_RESET}`.padEnd(PREFIX_PAD_LENGTH),
@@ -41,6 +48,7 @@ const logStats = (...message: (string | number)[]) =>
 
 export const logger = {
   info: logInfo,
-  stats: logStats,
-  error: logError
+  warn: logWarning,
+  error: logError,
+  stats: logStats
 };
