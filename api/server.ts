@@ -1,21 +1,21 @@
-import { config } from 'dotenv';
+import { config as configEnvVariables } from 'dotenv';
 import { appConfig } from './config/app';
 import { errorHandlerMiddleware, loggerMiddleware } from './infrastructure/middlewares';
 import { logger } from './library/logging';
+import { setUpRouting } from './server.routing';
 import {
   cleanup,
   connectToDatabases,
-  getApp,
+  createExpressApp,
   handleEvents,
-  handleUncaughtException,
-  setUpRouting
-} from './server.helpers';
+  handleUncaughtException
+} from './server.setup';
 
 async function main() {
-  const app = getApp();
+  const app = createExpressApp();
   const { port } = appConfig;
 
-  config();
+  configEnvVariables();
 
   handleEvents(cleanup, 'exit', 'beforeExit', 'SIGINT', 'SIGUSR1', 'SIGUSR2');
   handleEvents(handleUncaughtException, 'uncaughtException');
@@ -23,7 +23,7 @@ async function main() {
   await connectToDatabases('api');
 
   app.use(loggerMiddleware);
-  setUpRouting();
+  setUpRouting(app);
   app.use(errorHandlerMiddleware);
 
   app.listen(port, () => {

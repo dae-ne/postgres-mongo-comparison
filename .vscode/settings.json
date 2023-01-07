@@ -9,7 +9,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "*.ts": "$(capture).helpers.ts, $(capture).routing.ts",
+    "*.ts": "$(capture).helpers.ts, $(capture).setup.ts, $(capture).routing.ts",
     "*.env": ".env.template",
     ".prettierrc": ".prettierignore",
     ".eslintrc.js": ".eslintignore",
