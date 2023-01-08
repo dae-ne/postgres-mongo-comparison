@@ -5,7 +5,7 @@ import { connectToPostgresDb } from './domain/postgres/database';
 import { logger } from './library/logging';
 import { MongoDb, PostgresDb } from './types/database';
 
-type DatabaseReconnectionType = 'retries' | 'api';
+type DatabaseReconnectionModeType = 'retry' | 'request';
 
 type EventCallbackType =
   | (() => void)
@@ -31,7 +31,7 @@ export const handleEvents = (callback: EventCallbackType, ...events: string[]) =
   });
 };
 
-export const connectToDatabases = async (reconnection: DatabaseReconnectionType, attempt = 0) => {
+export const connectToDatabases = async (mode: DatabaseReconnectionModeType, attempt = 0) => {
   if (!app) {
     logger.error('express app was not created yet');
     return false;
@@ -56,7 +56,7 @@ export const connectToDatabases = async (reconnection: DatabaseReconnectionType,
 
     return true;
   } catch {
-    if (reconnection === 'api') {
+    if (mode === 'request') {
       logger.warn(`problem with database connection, waiting for api requests to reconnect`);
       return false;
     }
@@ -67,7 +67,7 @@ export const connectToDatabases = async (reconnection: DatabaseReconnectionType,
       `problem with database connection, retrying in ${DB_CONNECTION_RETRY_DELAY} seconds (attempt: ${a}/${MAX_DB_CONNECTION_RETRY_ATTEMPTS})`
     );
 
-    setTimeout(() => connectToDatabases(reconnection, a), DB_CONNECTION_RETRY_DELAY * 1000);
+    setTimeout(() => connectToDatabases(mode, a), DB_CONNECTION_RETRY_DELAY * 1000);
     return false;
   }
 };

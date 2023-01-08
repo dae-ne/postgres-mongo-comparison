@@ -23,7 +23,7 @@ async function main() {
   handleEvents(cleanup, 'exit', 'beforeExit', 'SIGINT', 'SIGUSR1', 'SIGUSR2');
   handleEvents(handleUncaughtException, 'uncaughtException');
 
-  await connectToDatabases('api');
+  await connectToDatabases('request');
 
   app.use(loggerMiddleware);
   setUpRouting(app);

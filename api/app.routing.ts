@@ -26,7 +26,7 @@ const handleConnectRequest = async (_: Request, res: Response) => {
     return;
   }
 
-  const connected = await connectToDatabases('retries');
+  const connected = await connectToDatabases('retry');
 
   if (connected) {
     logger.info(`connected to databases`);
