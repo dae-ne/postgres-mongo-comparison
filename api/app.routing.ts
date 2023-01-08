@@ -1,9 +1,9 @@
 import { Express, Request, Response } from 'express';
+import { connectToDatabases } from './app.setup';
 import { router as mongoRouter } from './domain/mongo/routing';
 import { router as postgresRouter } from './domain/postgres/routing';
 import { router as statsRouter } from './domain/stats/routing.js';
 import { logger } from './library/logging';
-import { connectToDatabases } from './server.setup';
 
 const MIN_RECONNECTION_REQUESTS = 2;
 

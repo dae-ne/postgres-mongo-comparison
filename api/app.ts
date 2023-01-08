@@ -4,17 +4,17 @@ import { config as configEnvVariables } from 'dotenv';
 
 configEnvVariables();
 
-import { appConfig } from './config/app';
-import { errorHandlerMiddleware, loggerMiddleware } from './infrastructure/middlewares';
-import { logger } from './library/logging';
-import { setUpRouting } from './server.routing';
+import { setUpRouting } from './app.routing';
 import {
   cleanup,
   connectToDatabases,
   createExpressApp,
   handleEvents,
   handleUncaughtException
-} from './server.setup';
+} from './app.setup';
+import { appConfig } from './config/app';
+import { errorHandlerMiddleware, loggerMiddleware } from './infrastructure/middlewares';
+import { logger } from './library/logging';
 
 async function main() {
   const app = createExpressApp();
