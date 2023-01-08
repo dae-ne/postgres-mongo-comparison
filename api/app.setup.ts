@@ -31,7 +31,10 @@ export const handleEvents = (callback: EventCallbackType, ...events: string[]) =
   });
 };
 
-export const connectToDatabases = async (mode: DatabaseReconnectionModeType, attempt = 0) => {
+export const connectToDatabases = async (
+  reconnectionMode: DatabaseReconnectionModeType,
+  attempt = 0
+) => {
   if (!app) {
     logger.error('express app was not created yet');
     return false;
@@ -56,7 +59,7 @@ export const connectToDatabases = async (mode: DatabaseReconnectionModeType, att
 
     return true;
   } catch {
-    if (mode === 'request') {
+    if (reconnectionMode === 'request') {
       logger.warn(`problem with database connection, waiting for api requests to reconnect`);
       return false;
     }
@@ -67,7 +70,7 @@ export const connectToDatabases = async (mode: DatabaseReconnectionModeType, att
       `problem with database connection, retrying in ${DB_CONNECTION_RETRY_DELAY} seconds (attempt: ${a}/${MAX_DB_CONNECTION_RETRY_ATTEMPTS})`
     );
 
-    setTimeout(() => connectToDatabases(mode, a), DB_CONNECTION_RETRY_DELAY * 1000);
+    setTimeout(() => connectToDatabases(reconnectionMode, a), DB_CONNECTION_RETRY_DELAY * 1000);
     return false;
   }
 };
