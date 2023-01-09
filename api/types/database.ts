@@ -6,20 +6,21 @@ export type MongoDb = Db;
 
 export type PostgresDb = Pool;
 
-export type PostgresGetQueryMethodType = (
-  db: PostgresDb,
+export type DbGetQueryMethodType<TDb extends PostgresDb | MongoDb> = (
+  db: TDb,
   offset: number,
   limit: number,
   id: number | null
 ) => Promise<unknown[]>;
 
-export type MongoGetQueryMethodType = (
-  db: MongoDb,
-  offset: number,
-  limit: number,
-  id: number | null
-) => Promise<unknown[]>;
+export type DbCountQueryMethodType<TDb extends PostgresDb | MongoDb> = (
+  db: TDb
+) => Promise<Quantity>;
 
-export type PostgresCountQueryMethodType = (db: PostgresDb) => Promise<Quantity>;
+export type PostgresGetQueryMethodType = DbGetQueryMethodType<PostgresDb>;
 
-export type MongoCountQueryMethodType = (db: MongoDb) => Promise<Quantity>;
+export type MongoGetQueryMethodType = DbGetQueryMethodType<MongoDb>;
+
+export type PostgresCountQueryMethodType = DbCountQueryMethodType<PostgresDb>;
+
+export type MongoCountQueryMethodType = DbCountQueryMethodType<MongoDb>;

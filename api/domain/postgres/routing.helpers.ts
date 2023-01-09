@@ -8,7 +8,7 @@ import {
 } from '../../types/database';
 import { handleCountRequest, handleGetByIdRequest, handleGetRequest } from '../common/handlers';
 
-const getDb = (req: Request): PostgresDb => req.app.locals.PostgresDb;
+const getDb = (req: Request): PostgresDb => req.app.locals.postgresDb;
 
 export const registerCountEndpoint = (router: Router, method: PostgresCountQueryMethodType) => {
   router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {

@@ -4,6 +4,8 @@ import { logger } from '../../library/logging';
 import { getStatsQueryStringParams } from '../../library/query-strings';
 import { StatsDatasetDto, StatsDto } from '../../types/contracts';
 import {
+  DbCountQueryMethodType,
+  DbGetQueryMethodType,
   MongoCountQueryMethodType,
   MongoDb,
   MongoGetQueryMethodType,
@@ -12,12 +14,11 @@ import {
   PostgresGetQueryMethodType
 } from '../../types/database';
 
-// TODO: fix types in parameters
-const handleSingleDatabase = async (
-  db: PostgresDb & MongoDb,
+const handleSingleDatabase = async <TDb extends PostgresDb | MongoDb>(
+  db: TDb,
   dbName: string,
-  query: PostgresGetQueryMethodType | MongoGetQueryMethodType,
-  countQuery: PostgresCountQueryMethodType | MongoCountQueryMethodType,
+  query: DbGetQueryMethodType<TDb>,
+  countQuery: DbCountQueryMethodType<TDb>,
   first: number,
   last: number,
   step: number

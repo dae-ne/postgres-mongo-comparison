@@ -3,7 +3,7 @@ import { PaginatedDto } from '../../types/contracts';
 import { MongoCountQueryMethodType, MongoDb, MongoGetQueryMethodType } from '../../types/database';
 import { handleCountRequest, handleGetByIdRequest, handleGetRequest } from '../common/handlers';
 
-const getDb = (req: Request): MongoDb => req.app.locals.MongoDb;
+const getDb = (req: Request): MongoDb => req.app.locals.mongoDb;
 
 export const registerCountEndpoint = (router: Router, method: MongoCountQueryMethodType) => {
   router.get(`/${method.name}`, async (req: Request, res: Response, next: NextFunction) => {
