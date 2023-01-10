@@ -49,13 +49,13 @@ export const connectToDatabases = async (
     logger.info('connecting to databases');
     postgresDb = connectToPostgresDb();
     mongoDb = await connectToMongoDb();
-    logger.info('successfully connected to databases');
 
     app.locals = {
       ...app.locals,
       postgresDb,
       mongoDb
     };
+    logger.info('successfully connected to databases');
 
     return true;
   } catch {
