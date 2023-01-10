@@ -123,7 +123,7 @@ export const getPostgresFullFood: PostgresGetQueryMethodType = async (
   limit: number,
   id: number | null = null
 ) => {
-  const query = `SELECT * FROM food JOIN branded_food USING (fdc_id) ${createWhereIdClause(
+  const query = `SELECT * FROM food LEFT JOIN branded_food USING (fdc_id) ${createWhereIdClause(
     id,
     'fdc_id'
   )} OFFSET $1 LIMIT $2`;
