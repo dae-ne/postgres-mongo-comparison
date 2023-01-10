@@ -9,7 +9,7 @@ const PREFIX_PAD_LENGTH = 18;
 
 const getMessageWithDateTime = (...message: (string | number)[]) => {
   const date = new Date();
-  return `[${date.toLocaleTimeString()}] ${message.join(' ')}`;
+  return `[${date.toLocaleTimeString('pl-PL')}] ${message.join(' ')}`;
 };
 
 const logInfo = (...message: (string | number)[]) =>
