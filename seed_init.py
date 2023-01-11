@@ -14,6 +14,7 @@ BASE_PATH = './db/seed/'
 FDC_DATASETS_URL = 'https://fdc.nal.usda.gov/fdc-datasets/'
 FDC_BRANDED_FOOD_FILE_NAME = 'FoodData_Central_branded_food_csv_2022-10-28.zip'
 FDC_SUPPORTING_DATA_FILE_NAME = 'FoodData_Central_Supporting_Data_csv_2022-10-28.zip'
+TEST_CSV_FILE_NAME = 'test.csv'
 
 
 class Colors(StrEnum):
@@ -94,6 +95,27 @@ def remove_files(files: List[str]):
         file_path = f'{BASE_PATH}{file}'
         file_to_remove = Path(file_path)
         file_to_remove.unlink()
+
+
+def add_test_csv_file():
+    columns = [
+        'id',
+        'first_col',
+        'second_col',
+        'third_col',
+        'fourth_col'
+    ]
+    data = [
+        [
+            1,
+            'value_1',
+            'value_2',
+            'value_3',
+            'value_4'
+        ]
+    ]
+    df = pd.DataFrame(data=data, columns=columns)
+    df.to_csv(f'{BASE_PATH}{TEST_CSV_FILE_NAME}', index=False)
 
 
 def main():
@@ -202,6 +224,10 @@ def main():
         print_info('[start]', 'cleanup', Colors.OKBLUE)
         remove_files(files_to_remove)
         print_info('[done]', 'cleanup', Colors.OKBLUE)
+
+        print_info('[start]', 'add test csv file', Colors.OKBLUE)
+        add_test_csv_file()
+        print_info('[done]', 'add test csv file', Colors.OKBLUE)
     except KeyboardInterrupt:
         print_info('error:', 'interrupted', Colors.FAIL)
     except Exception as e:

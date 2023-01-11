@@ -69,6 +69,14 @@ CREATE TABLE food_nutrient (
     derivation_id INT
 );
 
+CREATE TABLE test (
+    id INT PRIMARY KEY,
+    first_col TEXT,
+    second_col TEXT,
+    third_col TEXT,
+    fourth_col TEXT
+);
+
 \copy food from '/seed/food.csv' delimiter ',' csv header;
 \copy branded_food from '/seed/branded_food.csv' delimiter ',' csv header;
 -- \copy food_attribute_type from '/seed/food_attribute_type.csv' delimiter ',' csv header;
@@ -77,3 +85,4 @@ CREATE TABLE food_nutrient (
 \copy food_nutrient_source from '/seed/food_nutrient_source.csv' delimiter ',' csv header;
 \copy food_nutrient_derivation from '/seed/food_nutrient_derivation.csv' delimiter ',' csv header;
 \copy food_nutrient from '/seed/food_nutrient.csv' delimiter ',' csv header;
+\copy test from '/seed/test.csv' delimiter ',' csv header;

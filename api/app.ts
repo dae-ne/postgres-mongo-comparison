@@ -4,6 +4,7 @@ import { config as configEnvVariables } from 'dotenv';
 
 configEnvVariables();
 
+import { json } from 'express';
 import { setUpRouting } from './app.routing';
 import {
   cleanup,
@@ -25,6 +26,7 @@ async function main() {
 
   await connectToDatabases('request');
 
+  app.use(json());
   app.use(loggerMiddleware);
   setUpRouting(app);
   app.use(errorHandlerMiddleware);

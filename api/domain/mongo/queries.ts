@@ -1,6 +1,13 @@
 import { countDocuments, getDataFilteredByFdcId, getDataFilteredById } from './queries.helpers';
-import { MongoCountQueryMethodType, MongoDb, MongoGetQueryMethodType } from '../../types/database';
-import { Quantity } from '../../types/models';
+import {
+  MongoAddQueryMethodType,
+  MongoCountQueryMethodType,
+  MongoDb,
+  MongoDeleteQueryMethodType,
+  MongoGetQueryMethodType,
+  MongoUpdateQueryMethodType
+} from '../../types/database';
+import { Quantity, TestData, TestDataWithoutId } from '../../types/models';
 
 export const countMongoFood: MongoCountQueryMethodType = async (db: MongoDb): Promise<Quantity> => {
   const collectionName = 'food';
@@ -264,4 +271,40 @@ export const getMongoFullFoodWithFullNutrients: MongoGetQueryMethodType = async 
   }
 
   return db.collection(collectionName).aggregate(aggregatePipeline).toArray();
+};
+
+export const countMongoTest: MongoCountQueryMethodType = async (db: MongoDb): Promise<Quantity> => {
+  const collectionName = 'test';
+  return countDocuments(db, collectionName);
+};
+
+export const getMongoTest: MongoGetQueryMethodType = async (
+  db: MongoDb,
+  skip: number,
+  limit: number,
+  id: number | null = null
+) => {
+  const collectionName = 'test';
+  return getDataFilteredById(db, collectionName, skip, limit, id);
+};
+
+export const addMongoMany: MongoAddQueryMethodType = async (db: MongoDb, data: TestData[]) => {
+  const collectionName = 'test';
+  const collection = db.collection(collectionName);
+  await collection.insertMany(data);
+};
+
+export const updateMongoAll: MongoUpdateQueryMethodType = async (
+  db: MongoDb,
+  data: TestDataWithoutId
+) => {
+  const collectionName = 'test';
+  const collection = db.collection(collectionName);
+  await collection.updateMany({ id: { $gt: 1 } }, { $set: data });
+};
+
+export const deleteMongoAll: MongoDeleteQueryMethodType = async (db: MongoDb) => {
+  const collectionName = 'test';
+  const collection = db.collection(collectionName);
+  await collection.deleteMany({ id: { $ne: 1 } });
 };

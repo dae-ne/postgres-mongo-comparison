@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import { registerStatsEndpoint } from './routing.helpers';
+import { registerStatsAddUpdateDeleteEndpoint, registerStatsGetEndpoint } from './routing.helpers';
 import {
+  addMongoMany,
   countMongoBrandedFood,
   countMongoFood,
   countMongoFoodNutrient,
   countMongoFoodNutrientDerivation,
   countMongoFoodNutrientSource,
   countMongoNutrient,
+  deleteMongoAll,
   getMongoBrandedFood,
   getMongoFood,
   getMongoFoodNutrient,
@@ -15,7 +17,8 @@ import {
   getMongoFullFood,
   getMongoFullFoodWithFullNutrients,
   getMongoFullFoodWithNutrients,
-  getMongoNutrient
+  getMongoNutrient,
+  updateMongoAll
 } from '../mongo/queries';
 import {
   countPostgresBrandedFood,
@@ -32,12 +35,15 @@ import {
   getPostgresFoodNutrientDerivation,
   countPostgresFoodNutrientDerivation,
   getPostgresFoodNutrientSource,
-  countPostgresFoodNutrientSource
+  countPostgresFoodNutrientSource,
+  addPostgresMany,
+  updatePostgresAll,
+  deletePostgresAll
 } from '../postgres/queries';
 
 export const router = Router();
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getFoodStats',
   getPostgresFood,
@@ -46,7 +52,7 @@ registerStatsEndpoint(
   countMongoFood
 );
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getBrandedFoodStats',
   getPostgresBrandedFood,
@@ -55,7 +61,7 @@ registerStatsEndpoint(
   countMongoBrandedFood
 );
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getNutrientStats',
   getPostgresNutrient,
@@ -64,7 +70,7 @@ registerStatsEndpoint(
   countMongoNutrient
 );
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getFoodNutrientStats',
   getPostgresFoodNutrient,
@@ -73,7 +79,7 @@ registerStatsEndpoint(
   countMongoFoodNutrient
 );
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getFoodNutrientDerivationStats',
   getPostgresFoodNutrientDerivation,
@@ -82,7 +88,7 @@ registerStatsEndpoint(
   countMongoFoodNutrientDerivation
 );
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getFoodNutrientSourceStats',
   getPostgresFoodNutrientSource,
@@ -91,7 +97,7 @@ registerStatsEndpoint(
   countMongoFoodNutrientSource
 );
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getFullFoodStats',
   getPostgresFullFood,
@@ -100,7 +106,7 @@ registerStatsEndpoint(
   countMongoFood
 );
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getFullFoodWithNutrientsStats',
   getPostgresFullFoodWithNutrients,
@@ -109,11 +115,22 @@ registerStatsEndpoint(
   countMongoFood
 );
 
-registerStatsEndpoint(
+registerStatsGetEndpoint(
   router,
   'getFullFoodWithFullNutrientsStats',
   getPostgresFullFoodWithFullNutrients,
   getMongoFullFoodWithFullNutrients,
   countPostgresFood,
   countMongoFood
+);
+
+registerStatsAddUpdateDeleteEndpoint(
+  router,
+  'getAddUpdateDeleteStats',
+  addPostgresMany,
+  updatePostgresAll,
+  deletePostgresAll,
+  addMongoMany,
+  updateMongoAll,
+  deleteMongoAll
 );

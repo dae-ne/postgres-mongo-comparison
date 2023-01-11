@@ -1,54 +1,74 @@
 import { Router } from 'express';
+import * as queries from './queries';
 import {
-  countMongoBrandedFood,
-  countMongoFood,
-  countMongoFoodNutrient,
-  countMongoFoodNutrientDerivation,
-  countMongoFoodNutrientSource,
-  countMongoNutrient,
-  getMongoBrandedFood,
-  getMongoFood,
-  getMongoFoodNutrient,
-  getMongoFoodNutrientDerivation,
-  getMongoFoodNutrientSource,
-  getMongoFullFood,
-  getMongoFullFoodWithFullNutrients,
-  getMongoFullFoodWithNutrients,
-  getMongoNutrient
-} from './queries';
-import {
+  getMongoDb,
   registerCountEndpoint,
+  registerDeleteEndpoint,
   registerGetByIdEndpoint,
-  registerGetEndpoint
-} from './routing.helpers';
+  registerGetEndpoint,
+  registerPostEndpoint,
+  registerPutEndpoint
+} from '../common/routing';
 
 export const router = Router();
 
-registerCountEndpoint(router, countMongoFood);
-registerCountEndpoint(router, countMongoBrandedFood);
-registerCountEndpoint(router, countMongoNutrient);
-registerCountEndpoint(router, countMongoFoodNutrient);
-registerCountEndpoint(router, countMongoFoodNutrientDerivation);
-registerCountEndpoint(router, countMongoFoodNutrientSource);
+registerCountEndpoint(router, getMongoDb, queries.countMongoFood);
+registerCountEndpoint(router, getMongoDb, queries.countMongoBrandedFood);
+registerCountEndpoint(router, getMongoDb, queries.countMongoNutrient);
+registerCountEndpoint(router, getMongoDb, queries.countMongoFoodNutrient);
+registerCountEndpoint(router, getMongoDb, queries.countMongoFoodNutrientDerivation);
+registerCountEndpoint(router, getMongoDb, queries.countMongoFoodNutrientSource);
 
-registerGetEndpoint(router, getMongoFood, countMongoFood);
-registerGetEndpoint(router, getMongoBrandedFood, countMongoBrandedFood);
-registerGetEndpoint(router, getMongoNutrient, countMongoNutrient);
-registerGetEndpoint(router, getMongoFoodNutrient, countMongoFoodNutrient);
-registerGetEndpoint(router, getMongoFoodNutrientDerivation, countMongoFoodNutrientDerivation);
-registerGetEndpoint(router, getMongoFoodNutrientSource, countMongoFoodNutrientSource);
+registerGetEndpoint(router, getMongoDb, queries.getMongoFood, queries.countMongoFood);
+registerGetEndpoint(router, getMongoDb, queries.getMongoBrandedFood, queries.countMongoBrandedFood);
+registerGetEndpoint(router, getMongoDb, queries.getMongoNutrient, queries.countMongoNutrient);
+registerGetEndpoint(
+  router,
+  getMongoDb,
+  queries.getMongoFoodNutrient,
+  queries.countMongoFoodNutrient
+);
+registerGetEndpoint(
+  router,
+  getMongoDb,
+  queries.getMongoFoodNutrientDerivation,
+  queries.countMongoFoodNutrientDerivation
+);
+registerGetEndpoint(
+  router,
+  getMongoDb,
+  queries.getMongoFoodNutrientSource,
+  queries.countMongoFoodNutrientSource
+);
 
-registerGetEndpoint(router, getMongoFullFood, countMongoFood);
-registerGetEndpoint(router, getMongoFullFoodWithNutrients, countMongoFood);
-registerGetEndpoint(router, getMongoFullFoodWithFullNutrients, countMongoFood);
+registerGetEndpoint(router, getMongoDb, queries.getMongoFullFood, queries.countMongoFood);
+registerGetEndpoint(
+  router,
+  getMongoDb,
+  queries.getMongoFullFoodWithNutrients,
+  queries.countMongoFood
+);
+registerGetEndpoint(
+  router,
+  getMongoDb,
+  queries.getMongoFullFoodWithFullNutrients,
+  queries.countMongoFood
+);
 
-registerGetByIdEndpoint(router, getMongoFood);
-registerGetByIdEndpoint(router, getMongoBrandedFood);
-registerGetByIdEndpoint(router, getMongoNutrient);
-registerGetByIdEndpoint(router, getMongoFoodNutrient);
-registerGetByIdEndpoint(router, getMongoFoodNutrientDerivation);
-registerGetByIdEndpoint(router, getMongoFoodNutrientSource);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoFood);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoBrandedFood);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoNutrient);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoFoodNutrient);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoFoodNutrientDerivation);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoFoodNutrientSource);
 
-registerGetByIdEndpoint(router, getMongoFullFood);
-registerGetByIdEndpoint(router, getMongoFullFoodWithNutrients);
-registerGetByIdEndpoint(router, getMongoFullFoodWithFullNutrients);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoFullFood);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoFullFoodWithNutrients);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoFullFoodWithFullNutrients);
+
+registerCountEndpoint(router, getMongoDb, queries.countMongoTest);
+registerGetByIdEndpoint(router, getMongoDb, queries.getMongoTest);
+registerGetEndpoint(router, getMongoDb, queries.getMongoTest, queries.countMongoFood);
+registerPostEndpoint(router, getMongoDb, queries.addMongoMany);
+registerPutEndpoint(router, getMongoDb, queries.updateMongoAll);
+registerDeleteEndpoint(router, getMongoDb, queries.deleteMongoAll);
