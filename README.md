@@ -3,7 +3,7 @@
 ## Requirements
 
 - python _(tested with 3.10 and 3.11)_
-- Docker Desktop
+- Docker, Docker Compose
 
 ## Install and Run
 
