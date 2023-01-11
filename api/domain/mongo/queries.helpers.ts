@@ -15,8 +15,8 @@ export const getDataFilteredByFdcId = async (
 ) => {
   const collection = db.collection(collectionName);
   return id
-    ? collection.find({ fdc_id: id }).skip(skip).limit(limit).toArray()
-    : collection.find({}).skip(skip).limit(limit).toArray();
+    ? collection.find({ fdc_id: id }).project({ _id: 0 }).skip(skip).limit(limit).toArray()
+    : collection.find({}).project({ _id: 0 }).skip(skip).limit(limit).toArray();
 };
 
 export const getDataFilteredById = async (
@@ -28,6 +28,6 @@ export const getDataFilteredById = async (
 ) => {
   const collection = db.collection(collectionName);
   return id
-    ? collection.find({ id }).skip(skip).limit(limit).toArray()
-    : collection.find({}).skip(skip).limit(limit).toArray();
+    ? collection.find({ id }).project({ _id: 0 }).skip(skip).limit(limit).toArray()
+    : collection.find({}).project({ _id: 0 }).skip(skip).limit(limit).toArray();
 };
