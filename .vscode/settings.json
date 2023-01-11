@@ -14,5 +14,6 @@
     ".prettierrc": ".prettierignore",
     ".eslintrc.js": ".eslintignore",
     "docker-compose.yml": ".dockerignore"
-  }
+  },
+  "prettier.ignorePath": "api/.prettierignore"
 }

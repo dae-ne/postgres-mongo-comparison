@@ -1,25 +1,14 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { handleAddUpdateDeleteStatsRequest, handleGetStatsRequest } from './handlers';
-import {
-  MongoAddQueryMethodType,
-  MongoCountQueryMethodType,
-  MongoDeleteQueryMethodType,
-  MongoGetQueryMethodType,
-  MongoUpdateQueryMethodType,
-  PostgresAddQueryMethodType,
-  PostgresCountQueryMethodType,
-  PostgresDeleteQueryMethodType,
-  PostgresGetQueryMethodType,
-  PostgresUpdateQueryMethodType
-} from '../../types/database';
+import * as dbTypes from '../../types/database';
 
 export const registerStatsGetEndpoint = async (
   router: Router,
   methodName: string,
-  postgresQuery: PostgresGetQueryMethodType,
-  mongoQuery: MongoGetQueryMethodType,
-  postgresCountQuery: PostgresCountQueryMethodType,
-  mongoCountQuery: MongoCountQueryMethodType
+  postgresQuery: dbTypes.PostgresGetQueryMethodType,
+  mongoQuery: dbTypes.MongoGetQueryMethodType,
+  postgresCountQuery: dbTypes.PostgresCountQueryMethodType,
+  mongoCountQuery: dbTypes.MongoCountQueryMethodType
 ) => {
   router.get(`/${methodName}`, async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -41,12 +30,12 @@ export const registerStatsGetEndpoint = async (
 export const registerStatsAddUpdateDeleteEndpoint = async (
   router: Router,
   methodName: string,
-  postgresAddQuery: PostgresAddQueryMethodType,
-  postgresUpdateQuery: PostgresUpdateQueryMethodType,
-  postgresDeleteQuery: PostgresDeleteQueryMethodType,
-  mongoAddQuery: MongoAddQueryMethodType,
-  mongoUpdateQuery: MongoUpdateQueryMethodType,
-  mongoDeleteQuery: MongoDeleteQueryMethodType
+  postgresAddQuery: dbTypes.PostgresAddQueryMethodType,
+  postgresUpdateQuery: dbTypes.PostgresUpdateQueryMethodType,
+  postgresDeleteQuery: dbTypes.PostgresDeleteQueryMethodType,
+  mongoAddQuery: dbTypes.MongoAddQueryMethodType,
+  mongoUpdateQuery: dbTypes.MongoUpdateQueryMethodType,
+  mongoDeleteQuery: dbTypes.MongoDeleteQueryMethodType
 ) => {
   router.post(`/${methodName}`, async (req: Request, res: Response, next: NextFunction) => {
     try {
