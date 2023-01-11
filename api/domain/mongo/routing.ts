@@ -35,7 +35,7 @@ helpers.registerGetByIdEndpoint(router, helpers.getMongoDb, queries.getMongoFull
 
 helpers.registerCountEndpoint(router, helpers.getMongoDb, queries.countMongoTest);
 helpers.registerGetByIdEndpoint(router, helpers.getMongoDb, queries.getMongoTest);
-helpers.registerGetEndpoint(router, helpers.getMongoDb, queries.getMongoTest, queries.countMongoFood);
+helpers.registerGetEndpoint(router, helpers.getMongoDb, queries.getMongoTest, queries.countMongoTest);
 helpers.registerPostEndpoint(router, helpers.getMongoDb, queries.addMongoMany);
 helpers.registerPutEndpoint(router, helpers.getMongoDb, queries.updateMongoAll);
 helpers.registerDeleteEndpoint(router, helpers.getMongoDb, queries.deleteMongoAll);

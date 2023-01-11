@@ -35,7 +35,7 @@ helpers.registerGetByIdEndpoint(router, helpers.getPostgresDb, queries.getPostgr
 
 helpers.registerCountEndpoint(router, helpers.getPostgresDb, queries.countPostgresTest);
 helpers.registerGetByIdEndpoint(router, helpers.getPostgresDb, queries.getPostgresTest);
-helpers.registerGetEndpoint(router, helpers.getPostgresDb, queries.getPostgresTest, queries.countPostgresFood);
+helpers.registerGetEndpoint(router, helpers.getPostgresDb, queries.getPostgresTest, queries.countPostgresTest);
 helpers.registerPostEndpoint(router, helpers.getPostgresDb, queries.addPostgresMany);
 helpers.registerPutEndpoint(router, helpers.getPostgresDb, queries.updatePostgresAll);
 helpers.registerDeleteEndpoint(router, helpers.getPostgresDb, queries.deletePostgresAll);
