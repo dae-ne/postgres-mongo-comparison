@@ -1,0 +1,1164 @@
+{
+	"info": {
+		"_postman_id": "dd80d0cc-6887-4838-a2c3-03205293fbae",
+		"name": "Stats",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14306866"
+	},
+	"item": [
+		{
+			"name": "Postgres Only",
+			"item": [
+				{
+					"name": "getFoodStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFoodStats?first=50000&last=1702235&step=50000&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFoodStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "50000"
+								},
+								{
+									"key": "last",
+									"value": "1702235"
+								},
+								{
+									"key": "step",
+									"value": "50000"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFullFoodStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFullFoodStats?first=50000&last=1702235&step=50000&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFullFoodStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "50000"
+								},
+								{
+									"key": "last",
+									"value": "1702235"
+								},
+								{
+									"key": "step",
+									"value": "50000"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFullFoodWithNutrientsStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFullFoodWithNutrientsStats?first=10000&last=100000&step=10000&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFullFoodWithNutrientsStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "10000"
+								},
+								{
+									"key": "last",
+									"value": "100000"
+								},
+								{
+									"key": "step",
+									"value": "10000"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFullFoodWithFullNutrientsStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFullFoodWithFullNutrientsStats?first=10000&last=100000&step=10000&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFullFoodWithFullNutrientsStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "10000"
+								},
+								{
+									"key": "last",
+									"value": "100000"
+								},
+								{
+									"key": "step",
+									"value": "10000"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBrandedFoodStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getBrandedFoodStats?first=50000&last=1702235&step=50000&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getBrandedFoodStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "50000"
+								},
+								{
+									"key": "last",
+									"value": "1702235"
+								},
+								{
+									"key": "step",
+									"value": "50000"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getNutrientStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getNutrientStats?first=20&last=474&step=20&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getNutrientStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "20"
+								},
+								{
+									"key": "last",
+									"value": "474"
+								},
+								{
+									"key": "step",
+									"value": "20"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFoodNutrientStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFoodNutrientStats?first=500000&last=21453550&step=500000&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFoodNutrientStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "500000"
+								},
+								{
+									"key": "last",
+									"value": "21453550"
+								},
+								{
+									"key": "step",
+									"value": "500000"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFoodNutrientDerivationStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFoodNutrientDerivationStats?first=4&last=64&step=4&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFoodNutrientDerivationStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "4"
+								},
+								{
+									"key": "last",
+									"value": "64"
+								},
+								{
+									"key": "step",
+									"value": "4"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFoodNutrientSourceStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFoodNutrientSourceStats?first=1&last=10&step=1&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFoodNutrientSourceStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "1"
+								},
+								{
+									"key": "last",
+									"value": "10"
+								},
+								{
+									"key": "step",
+									"value": "1"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAddUpdateDeleteStats",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/getAddUpdateDeleteStats?first=10000&last=100000&step=10000&db=PostgreSQL",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getAddUpdateDeleteStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "10000"
+								},
+								{
+									"key": "last",
+									"value": "100000"
+								},
+								{
+									"key": "step",
+									"value": "10000"
+								},
+								{
+									"key": "db",
+									"value": "PostgreSQL"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mongo Only",
+			"item": [
+				{
+					"name": "getFoodStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFoodStats?first=50000&last=1702235&step=50000&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFoodStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "50000"
+								},
+								{
+									"key": "last",
+									"value": "1702235"
+								},
+								{
+									"key": "step",
+									"value": "50000"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFullFoodStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFullFoodStats?first=1&last=5&step=1&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFullFoodStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "1"
+								},
+								{
+									"key": "last",
+									"value": "5"
+								},
+								{
+									"key": "step",
+									"value": "1"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFullFoodWithNutrientsStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFullFoodWithNutrientsStats?first=1&last=5&step=1&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFullFoodWithNutrientsStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "1"
+								},
+								{
+									"key": "last",
+									"value": "5"
+								},
+								{
+									"key": "step",
+									"value": "1"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFullFoodWithFullNutrientsStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFullFoodWithFullNutrientsStats?first=1&last=5&step=1&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFullFoodWithFullNutrientsStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "1"
+								},
+								{
+									"key": "last",
+									"value": "5"
+								},
+								{
+									"key": "step",
+									"value": "1"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBrandedFoodStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getBrandedFoodStats?first=50000&last=1702235&step=50000&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getBrandedFoodStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "50000"
+								},
+								{
+									"key": "last",
+									"value": "1702235"
+								},
+								{
+									"key": "step",
+									"value": "50000"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getNutrientStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getNutrientStats?first=20&last=474&step=20&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getNutrientStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "20"
+								},
+								{
+									"key": "last",
+									"value": "474"
+								},
+								{
+									"key": "step",
+									"value": "20"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFoodNutrientStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFoodNutrientStats?first=500000&last=21453550&step=500000&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFoodNutrientStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "500000"
+								},
+								{
+									"key": "last",
+									"value": "21453550"
+								},
+								{
+									"key": "step",
+									"value": "500000"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFoodNutrientDerivationStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFoodNutrientDerivationStats?first=4&last=64&step=4&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFoodNutrientDerivationStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "4"
+								},
+								{
+									"key": "last",
+									"value": "64"
+								},
+								{
+									"key": "step",
+									"value": "4"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFoodNutrientSourceStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getFoodNutrientSourceStats?first=1&last=10&step=1&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getFoodNutrientSourceStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "1"
+								},
+								{
+									"key": "last",
+									"value": "10"
+								},
+								{
+									"key": "step",
+									"value": "1"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAddUpdateDeleteStats",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/getAddUpdateDeleteStats?first=10000&last=100000&step=10000&db=MongoDB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getAddUpdateDeleteStats"
+							],
+							"query": [
+								{
+									"key": "first",
+									"value": "10000"
+								},
+								{
+									"key": "last",
+									"value": "100000"
+								},
+								{
+									"key": "step",
+									"value": "10000"
+								},
+								{
+									"key": "db",
+									"value": "MongoDB"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getFoodStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getFoodStats?first=50000&last=1702235&step=50000",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getFoodStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "50000"
+						},
+						{
+							"key": "last",
+							"value": "1702235"
+						},
+						{
+							"key": "step",
+							"value": "50000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFullFoodStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getFullFoodStats?first=1&last=5&step=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getFullFoodStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "1"
+						},
+						{
+							"key": "last",
+							"value": "5"
+						},
+						{
+							"key": "step",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFullFoodWithNutrientsStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getFullFoodWithNutrientsStats?first=1&last=5&step=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getFullFoodWithNutrientsStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "1"
+						},
+						{
+							"key": "last",
+							"value": "5"
+						},
+						{
+							"key": "step",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFullFoodWithFullNutrientsStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getFullFoodWithFullNutrientsStats?first=1&last=21&step=4",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getFullFoodWithFullNutrientsStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "1"
+						},
+						{
+							"key": "last",
+							"value": "21"
+						},
+						{
+							"key": "step",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBrandedFoodStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getBrandedFoodStats?first=50000&last=1702235&step=50000",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getBrandedFoodStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "50000"
+						},
+						{
+							"key": "last",
+							"value": "1702235"
+						},
+						{
+							"key": "step",
+							"value": "50000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getNutrientStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getNutrientStats?first=20&last=474&step=20",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getNutrientStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "20"
+						},
+						{
+							"key": "last",
+							"value": "474"
+						},
+						{
+							"key": "step",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFoodNutrientStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getFoodNutrientStats?first=500000&last=21453550&step=500000",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getFoodNutrientStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "500000"
+						},
+						{
+							"key": "last",
+							"value": "21453550"
+						},
+						{
+							"key": "step",
+							"value": "500000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFoodNutrientDerivationStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getFoodNutrientDerivationStats?first=4&last=64&step=4",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getFoodNutrientDerivationStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "4"
+						},
+						{
+							"key": "last",
+							"value": "64"
+						},
+						{
+							"key": "step",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFoodNutrientSourceStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getFoodNutrientSourceStats?first=1&last=10&step=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getFoodNutrientSourceStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "1"
+						},
+						{
+							"key": "last",
+							"value": "10"
+						},
+						{
+							"key": "step",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAddUpdateDeleteStats",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/getAddUpdateDeleteStats?first=10000&last=100000&step=10000",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getAddUpdateDeleteStats"
+					],
+					"query": [
+						{
+							"key": "first",
+							"value": "10000"
+						},
+						{
+							"key": "last",
+							"value": "100000"
+						},
+						{
+							"key": "step",
+							"value": "10000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const template = `",
+					"<center><h1>Canvas</h1></center>",
+					"<canvas id=\"chart\"></canvas>",
+					"",
+					"<center style=\"padding-top:64px;\"><h1>Image</h1></center>",
+					"<img id=\"image\"></img>",
+					"",
+					"<script src=\"https://cdn.jsdelivr.net/npm/chart.js@2.8.0\"></script>",
+					"",
+					"<script>",
+					"const CHART_ANIMATION_DURATION = 1000;",
+					"",
+					"const colors = [",
+					"    'rgb(255, 0, 255)',",
+					"    'rgb(0, 255, 255)',",
+					"    'rgb(255, 255, 0)',",
+					"    'rgb(0, 0, 255)',",
+					"    'rgb(0, 255, 0)',",
+					"    'rgb(255, 0, 0)'",
+					"];",
+					"",
+					"const canvas = document.getElementById('chart');",
+					"const image = document.getElementById('image');",
+					"const ctx = canvas.getContext('2d');",
+					"",
+					"const chart = new Chart(ctx, {",
+					"    type: 'line',",
+					"    data: {",
+					"        labels: [],",
+					"        datasets: []",
+					"    },",
+					"    options: {",
+					"        scales: {",
+					"            xAxes: [",
+					"                {",
+					"                    scaleLabel: {",
+					"                        display: true,",
+					"                        labelString: 'number of returned items'",
+					"                    }",
+					"                }",
+					"            ],",
+					"            yAxes: [",
+					"                {",
+					"                    scaleLabel: {",
+					"                        display: true,",
+					"                        labelString: 'time [ms]'",
+					"                    }",
+					"                }",
+					"            ]",
+					"        }, ",
+					"        animation: {",
+					"            duration: CHART_ANIMATION_DURATION",
+					"        }",
+					"    }",
+					"});",
+					"",
+					"pm.getData((err, value) => {",
+					"    const { labels, datasets } = value;",
+					"    chart.data.datasets = datasets.map((d, index) => {",
+					"        const { name, times } = d;",
+					"        const color = colors[index];",
+					"        return ({",
+					"            label: name,",
+					"            data: times,",
+					"            borderColor: color,",
+					"            backgroundColor: color,",
+					"            fill: false",
+					"        });",
+					"    });",
+					"    console.log(chart.data.datasets);",
+					"    chart.data.labels = labels;",
+					"    chart.update();",
+					"});",
+					"",
+					"const setImage = () => {",
+					"    image.src = canvas.toDataURL('image/png');",
+					"};",
+					"",
+					"canvas.addEventListener('click', () => {",
+					"    setTimeout(setImage, CHART_ANIMATION_DURATION);",
+					"});",
+					"",
+					"setTimeout(setImage, CHART_ANIMATION_DURATION);",
+					"</script>",
+					"`;",
+					"",
+					"const { labels, datasets } = pm.response.json();",
+					"pm.visualizer.set(template, { labels, datasets });"
+				]
+			}
+		}
+	]
+}

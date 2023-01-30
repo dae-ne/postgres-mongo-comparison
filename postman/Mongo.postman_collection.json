@@ -1,0 +1,737 @@
+{
+	"info": {
+		"_postman_id": "08104352-7025-42ae-8e3d-3409d6f8b664",
+		"name": "Mongo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14306866"
+	},
+	"item": [
+		{
+			"name": "Count",
+			"item": [
+				{
+					"name": "countMongoFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countMongoFood",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countMongoFood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countMongoBrandedFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countMongoBrandedFood",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countMongoBrandedFood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countMongoNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countMongoNutrient",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countMongoNutrient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countMongoFoodNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countMongoFoodNutrient",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countMongoFoodNutrient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countMongoFoodNutrientDerivation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countMongoFoodNutrientDerivation",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countMongoFoodNutrientDerivation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countMongoFoodNutrientSource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countMongoFoodNutrientSource",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countMongoFoodNutrientSource"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Single",
+			"item": [
+				{
+					"name": "getMongoFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFood/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFood",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFullFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFullFood/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFullFood",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFullFoodWithNutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFullFoodWithNutrients/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFullFoodWithNutrients",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFullFoodWithFullNutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFullFoodWithFullNutrients/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFullFoodWithFullNutrients",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoBrandedFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoBrandedFood/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoBrandedFood",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoNutrient/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoNutrient",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFoodNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFoodNutrient/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFoodNutrient",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6320400"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFoodNutrientDerivation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFoodNutrientDerivation/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFoodNutrientDerivation",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "71"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFoodNutrientSource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFoodNutrientSource/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFoodNutrientSource",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Paginated",
+			"item": [
+				{
+					"name": "getMongoFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFood?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFood"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFullFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFullFood?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFullFood"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFullFoodWithNutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFullFoodWithNutrients?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFullFoodWithNutrients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFullFoodWithFullNutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFullFoodWithFullNutrients?page=1&size=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFullFoodWithFullNutrients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoBrandedFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoBrandedFood?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoBrandedFood"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoNutrient?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoNutrient"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFoodNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFoodNutrient?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFoodNutrient"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFoodNutrientDerivation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFoodNutrientDerivation?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFoodNutrientDerivation"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoFoodNutrientSource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoFoodNutrientSource?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoFoodNutrientSource"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Data",
+			"item": [
+				{
+					"name": "getMongoTest - single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoTest/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoTest",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMongoTest - paginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getMongoTest?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMongoTest"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countMongoTest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countPostgresTest",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countPostgresTest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addMongoMany",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 2,\r\n        \"first_col\": \"default_value_1\",\r\n        \"second_col\": \"default_value_2\",\r\n        \"third_col\": \"default_value_3\",\r\n        \"fourth_col\": \"default_value_4\"\r\n    },\r\n    {\r\n        \"id\": 3,\r\n        \"first_col\": \"default_value_1\",\r\n        \"second_col\": \"default_value_2\",\r\n        \"third_col\": \"default_value_3\",\r\n        \"fourth_co\": \"default_value_4\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/addMongoMany",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"addMongoMany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMongoAll",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_col\": \"updated_value_1\",\r\n    \"second_col\": \"updated_value_2\",\r\n    \"third_col\": \"updated_value_3\",\r\n    \"fourth_co\": \"updated_value_4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/updateMongoAll",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"updateMongoAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMongoAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"first_col\": \"default_value_1\",\r\n    \"second_col\": \"default_value_2\",\r\n    \"third_col\": \"default_value_3\",\r\n    \"fourth_co\": \"default_value_4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/deleteMongoAll",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"deleteMongoAll"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

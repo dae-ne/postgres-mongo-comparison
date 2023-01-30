@@ -1,0 +1,737 @@
+{
+	"info": {
+		"_postman_id": "aba9269f-e2f3-4abf-90d4-7d4e64fe215d",
+		"name": "Postgres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14306866"
+	},
+	"item": [
+		{
+			"name": "Count",
+			"item": [
+				{
+					"name": "countPostgresFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countPostgresFood",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countPostgresFood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countPostgresBrandedFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countPostgresBrandedFood",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countPostgresBrandedFood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countPostgresNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countPostgresNutrient",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countPostgresNutrient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countPostgresFoodNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countPostgresFoodNutrient",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countPostgresFoodNutrient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countPostgresFoodNutrientDerivation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countPostgresFoodNutrientDerivation",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countPostgresFoodNutrientDerivation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countPostgresFoodNutrientSource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countPostgresFoodNutrientSource",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countPostgresFoodNutrientSource"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Single",
+			"item": [
+				{
+					"name": "getPostgresFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFood/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFood",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFullFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFullFood/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFullFood",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFullFoodWithNutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFullFoodWithNutrients/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFullFoodWithNutrients",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFullFoodWithFullNutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFullFoodWithFullNutrients/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFullFoodWithFullNutrients",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresBrandedFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresBrandedFood/:fdc_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresBrandedFood",
+								":fdc_id"
+							],
+							"variable": [
+								{
+									"key": "fdc_id",
+									"value": "1105904"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresNutrient/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresNutrient",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFoodNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFoodNutrient/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFoodNutrient",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6320400"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFoodNutrientDerivation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFoodNutrientDerivation/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFoodNutrientDerivation",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "71"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFoodNutrientSource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFoodNutrientSource/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFoodNutrientSource",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Paginated",
+			"item": [
+				{
+					"name": "getPostgresFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFood?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFood"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFullFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFullFood?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFullFood"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFullFoodWithNutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFullFoodWithNutrients?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFullFoodWithNutrients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFullFoodWithFullNutrients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFullFoodWithFullNutrients?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFullFoodWithFullNutrients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresBrandedFood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresBrandedFood?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresBrandedFood"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresNutrient?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresNutrient"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFoodNutrient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFoodNutrient?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFoodNutrient"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFoodNutrientDerivation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFoodNutrientDerivation?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFoodNutrientDerivation"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresFoodNutrientSource",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresFoodNutrientSource?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresFoodNutrientSource"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Data",
+			"item": [
+				{
+					"name": "getPostgresTest - single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresTest/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresTest",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostgresTest - paginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/getPostgresTest?page=1&size=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getPostgresTest"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countPostgresTest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/countPostgresTest",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"countPostgresTest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addPostgresMany",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 2,\r\n        \"first_col\": \"default_value_1\",\r\n        \"second_col\": \"default_value_2\",\r\n        \"third_col\": \"default_value_3\",\r\n        \"fourth_col\": \"default_value_4\"\r\n    },\r\n    {\r\n        \"id\": 3,\r\n        \"first_col\": \"default_value_1\",\r\n        \"second_col\": \"default_value_2\",\r\n        \"third_col\": \"default_value_3\",\r\n        \"fourth_co\": \"default_value_4\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/addPostgresMany",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"addPostgresMany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePostgresAll",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_col\": \"updated_value_1\",\r\n    \"second_col\": \"updated_value_2\",\r\n    \"third_col\": \"updated_value_3\",\r\n    \"fourth_co\": \"updated_value_4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/updatePostgresAll",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"updatePostgresAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePostgresAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"first_col\": \"default_value_1\",\r\n    \"second_col\": \"default_value_2\",\r\n    \"third_col\": \"default_value_3\",\r\n    \"fourth_co\": \"default_value_4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/deletePostgresAll",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"deletePostgresAll"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
