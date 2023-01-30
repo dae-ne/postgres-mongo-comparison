@@ -1,4 +1,4 @@
-# Project - ZTB
+# PostgreSQL vs MongoDB - comparison app
 
 ## Requirements
 
@@ -36,23 +36,19 @@ copy .env.template .env
 docker-compose up
 ```
 
-## Mongo
+## Test in Postman
 
-- **username:** user _(default)_
-- **password:** password _(default)_
-- **port:** 27017
+1. Create a new Postman workspace.
+2. Import the `Stats` collection from `./postman/Stats.postman_collection.json`
+3. Create an environment:
 
-## Postgres
+| VARIABLE | TYPE    | INITIAL VALUE         |
+|----------|---------|-----------------------|
+| base_url | default | http://localhost:8000 |
 
-- **username:** user _(default)_
-- **password:** password _(default)_
-- **port:** 5432
-
-## API
-
-- **protocol:** http
-- **host:** localhost
-- **port:** 8000
+4. Select the new environment (top right corner).
+5. Open any endpoint and click `Send`.
+6. When the request is done click `Visualize`.
 
 ## License
 
